@@ -1,0 +1,15 @@
+{
+  "name": "v-id",
+  "version": "1.0.0",
+  "description": "Virtual id for progressive learning institutions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "v-id"
+  },
+  "author": "Dennis Ndun'gu",
+  "license": "ISC"
+}
