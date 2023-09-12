@@ -1,0 +1,18 @@
+form{
+    position: absolute;
+    top: 15%;
+    left: 15%;
+}
+
+input[type="text"]{
+    height: 50px;
+    border: 1px solid #000;
+    width: 85%;
+}
+
+input[type="submit"]{
+    height: 40px;
+    width: 100px;
+    margin-top: 50px;
+
+}
