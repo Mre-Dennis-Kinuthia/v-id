@@ -1,0 +1,56 @@
+.v-card{
+height: 400px;
+width: 70%;
+background-color: cadetblue;
+position: absolute;
+left:15%;
+top: 10%;
+border-radius: 10px;
+}
+.qr-card{
+    height: 150px;
+    background-color: #fff;
+    width:60%;
+    position:absolute;
+    top: 5%;
+    left:20%;
+    border-radius: 10px;
+}
+.info-card{
+    height: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    width: 80%;
+}
+.name-card{
+    position: absolute;
+    top: 2%;
+    left: 25%;
+    height: 20px;
+    width: 50%;
+    background-color: #F2F8FD;
+    border-radius: 30px;
+}
+.program-card{
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    height: 20px;
+    width: 35%;
+    background-color: #F2F8FD;
+    border-radius: 15px;
+    font-size: 16px;
+}
+.c-card{
+    position: absolute;
+    top: 50%;
+    height: 20px;
+    width: 35%;
+    background-color: #F2F8FD;
+    left: 55%;
+    border-radius: 15px;
+    font-size: 16px;
+}
