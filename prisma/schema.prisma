@@ -3,8 +3,11 @@
 
 // schema.prisma
 
+// schema.prisma
+
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -12,10 +15,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UserProfile {
-  id        Int       @id @default(autoincrement())
-  Name      String
-  Email     String    @unique
-  Program   String
-  ImageUrl  String?
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  verified  Boolean  @default(false)
+  token     String?  @unique // Store the email verification token
 }
