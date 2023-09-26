@@ -1,5 +1,2 @@
 /node_modules/
 .env
-/prisma/
-
-DATABASE_URL=postgresql://nansi:nansi@localhost:5432/v-id
