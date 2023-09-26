@@ -1,58 +1,64 @@
 const express = require('express');
 const multer = require('multer');
-const { PrismaClient } = require('@prisma/client'); // Adjust the path as needed
+const exceljs = require('exceljs');
+const { PrismaClient } = require('@prisma/client');
+require('dotenv').config();
+const { createRecord } = require('./model'); // Import your Prisma model
 
 const app = express();
-const prisma = new PrismaClient();
+const port = process.env.PORT || 3000;
 
-const PORT = process.env.PORT || 3000;
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
-// Middleware for parsing multipart/form-data (file upload)
-const storage = multer.memoryStorage(); // Store the file in memory
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-app.use(express.json());
-
-// Serve your HTML file
-app.use(express.static('public'));
-
-app.post('/upload-excel', upload.single('excelFile'), async (req, res) => {
+app.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).send('No file uploaded.');
     }
 
-    // Assuming the uploaded file is in XLSX format
-    const xlsxFile = req.file.buffer;
+    const buffer = req.file.buffer;
+    const workbook = new exceljs.Workbook();
+    await workbook.xlsx.load(buffer);
 
-    // Parse the XLSX file (you'll need to install the 'xlsx' package)
-    const XLSX = require('xlsx');
-    const workbook = XLSX.read(xlsxFile);
+    const worksheet = workbook.getWorksheet(1);
+    if (!worksheet) {
+      return res.status(400).send('No worksheet found in the Excel file.');
+    }
 
-    // Assuming you want to process the first sheet
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
+    const rows = worksheet.getSheetValues();
+    if (!Array.isArray(rows) || rows.length === 0) {
+      return res.status(400).send('No data found in the Excel file.');
+    }
 
-    // Convert XLSX data to an array of objects (you might need to adjust this based on your Excel structure)
-    const data = XLSX.utils.sheet_to_json(worksheet);
+    // Assuming the first row contains headers
+    const headers = rows[0];
 
-    // Store the data in the database using Prisma
-    await prisma.user.createMany({
-      data: data.map((item) => ({
-        Name: item.Name,
-        Email: item.Email,
-        Program: item.Program,
-        ImageUrl: item.ImageUrl || null,
-      })),
-    });
+    for (let i = 1; i < rows.length; i++) {
+      const rowData = rows[i];
+      const record = {};
+      for (let j = 0; j < headers.length; j++) {
+        record[headers[j]] = rowData[j];
+      }
 
-    res.status(200).json({ message: 'Data imported successfully' });
+      // Insert the record into the database using Prisma
+      await createRecord(record); // This function is defined in your Prisma model
+    }
+
+    res.send('Data uploaded to PostgreSQL successfully.');
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred while processing the file' });
+    res.status(500).send('An error occurred during upload.');
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
