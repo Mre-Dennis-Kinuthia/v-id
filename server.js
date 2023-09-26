@@ -5,7 +5,8 @@ const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001; // Use 3001 instead of 3000
+
 const prisma = new PrismaClient();
 
 app.use(express.static('public'));
