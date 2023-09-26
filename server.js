@@ -3,7 +3,8 @@
 const express = require('express');
 const session = require('express-session');
 const nodemailer = require('nodemailer');
-const prisma = require('./generated/client');
+const { PrismaClient } = require('./generated/client'); // Adjust the path as needed
+const prisma = new PrismaClient();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,15 +37,15 @@ app.post('/register', async (req, res) => {
 
     // Send an email with the verification link (you need to set up nodemailer)
     const transporter = nodemailer.createTransport({
-      service: 'your_email_service',
+      service: 'your_email_service', // Replace with your email service (e.g., 'Gmail')
       auth: {
-        user: 'your_email_username',
-        pass: 'your_email_password',
+        user: 'your_email_username', // Replace with your email username
+        pass: 'your_email_password', // Replace with your email password
       },
     });
 
     const mailOptions = {
-      from: 'your_email@gmail.com',
+      from: 'your_email@gmail.com', // Replace with your email address
       to: email,
       subject: 'Email Verification',
       text: `Click this link to verify your email: http://localhost:${PORT}/verify/${token}`,
@@ -97,7 +98,13 @@ app.get('/verify/:token', async (req, res) => {
     res.status(500).send('Verification failed');
   }
 });
-z
+
+// Your virtual ID page route
+app.get('/virtual-id', (req, res) => {
+  // Add your code to render the virtual ID page here
+  res.sendFile(__dirname + '/public/virtual-id.html'); // Adjust the path as needed
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
