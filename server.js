@@ -3,10 +3,10 @@ const multer = require('multer');
 const exceljs = require('exceljs');
 const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
-const { createRecord } = require('./model'); // Import your Prisma model
 
 const app = express();
 const port = process.env.PORT || 3000;
+const prisma = new PrismaClient();
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -15,8 +15,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+// Define the storage for the uploaded Excel file
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+// ... Previous code ...
 
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
@@ -40,16 +43,16 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     // Assuming the first row contains headers
     const headers = rows[0];
+    const data = rows.slice(1);
 
-    for (let i = 1; i < rows.length; i++) {
-      const rowData = rows[i];
+    // Define your Prisma model and database table structure
+    for (const row of data) {
       const record = {};
-      for (let j = 0; j < headers.length; j++) {
-        record[headers[j]] = rowData[j];
+      for (let i = 0; i < headers.length; i++) {
+        record[headers[i]] = row[i];
       }
-
-      // Insert the record into the database using Prisma
-      await createRecord(record); // This function is defined in your Prisma model
+      // Insert the data into the PostgreSQL database using Prisma
+      await prisma.UserProfile.create({ data: record });
     }
 
     res.send('Data uploaded to PostgreSQL successfully.');
@@ -58,6 +61,14 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     res.status(500).send('An error occurred during upload.');
   }
 });
+
+// ... Continue with the rest of your code ...
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
