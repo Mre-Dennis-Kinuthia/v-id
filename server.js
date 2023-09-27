@@ -5,10 +5,11 @@ const { PrismaClient } = require('@prisma/client');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3001; // Use 3001 instead of 3000
+const port = process.env.PORT || 3001;
 
 const prisma = new PrismaClient();
 
+// Middleware setup
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,8 +21,7 @@ app.get('/', (req, res) => {
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// ... Previous code ...
-
+// Route for uploading Excel file
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     if (!req.file || !req.file.buffer) {
@@ -38,22 +38,24 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 
     const rows = worksheet.getSheetValues();
-    if (!Array.isArray(rows) || rows.length === 0) {
+    if (!Array.isArray(rows) || rows.length < 2) {
       return res.status(400).send('No data found in the Excel file.');
     }
 
-    // Assuming the first row contains headers
     const headers = rows[0];
     const data = rows.slice(1);
 
-    // Define your Prisma model and database table structure
     for (const row of data) {
+      if (row.length !== headers.length) {
+        return res.status(400).send('Inconsistent data found in the Excel file.');
+      }
+
       const record = {};
       for (let i = 0; i < headers.length; i++) {
         record[headers[i]] = row[i];
       }
-      // Insert the data into the PostgreSQL database using Prisma
-      await prisma.UserProfile.create({ data: record });
+
+      await prisma.userProfile.create({ data: record });
     }
 
     res.send('Data uploaded to PostgreSQL successfully.');
@@ -63,8 +65,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   }
 });
 
-// ... Continue with the rest of your code ...
-
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
