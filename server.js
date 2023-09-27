@@ -1,29 +1,27 @@
 const express = require('express');
-const multer = require('multer');
-const exceljs = require('exceljs');
 const { PrismaClient } = require('@prisma/client');
-require('dotenv').config();
+const multer = require('multer');
+const xlsx = require('xlsx');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 const prisma = new PrismaClient();
 
-// Middleware setup
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
-
-// Define the storage for the uploaded Excel file
+// Define storage for the uploaded Excel file
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Route for uploading Excel file
-// ...
+// Serve static files from the "public" folder
+app.use(express.static('public'));
 
+// Serve the HTML form
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Handle file upload
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     if (!req.file || !req.file.buffer) {
@@ -31,50 +29,44 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 
     const buffer = req.file.buffer;
-    const workbook = new exceljs.Workbook();
-    await workbook.xlsx.load(buffer);
+    const workbook = xlsx.read(buffer, { type: 'buffer' });
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
-    const worksheet = workbook.getWorksheet(1);
     if (!worksheet) {
       return res.status(400).send('No worksheet found in the Excel file.');
     }
 
-    const rows = worksheet.getSheetValues();
-    if (!Array.isArray(rows) || rows.length < 2) {
-      return res.status(400).send('No data found in the Excel file.');
-    }
+    const rows = xlsx.utils.sheet_to_json(worksheet);
 
-    const headers = rows[0];
-    if (!Array.isArray(headers)) {
-      return res.status(400).send('Headers are not in the correct format.');
-    }
+    await prisma.$transaction(async (prisma) => {
+      for (let i = 0; i < rows.length; i++) {
+        const { Name, Email, Program, ImageUrl } = rows[i];
 
-    const data = rows.slice(1);
+        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program}, ImageUrl: ${ImageUrl}`);
 
-    for (const row of data) {
-      if (!Array.isArray(row) || row.length !== headers.length) {
-        return res.status(400).send('Inconsistent data found in the Excel file.');
+        if (Name && Email && Program && ImageUrl) {
+          await prisma.userProfile.create({
+            data: {
+              Name,
+              Email,
+              Program,
+              ImageUrl,
+            },
+          });
+        } else {
+          console.log(`Skipping row ${i + 2} due to missing data.`);
+        }
       }
+    });
 
-      const record = {};
-      for (let i = 0; i < headers.length; i++) {
-        record[headers[i]] = row[i];
-      }
-
-      await prisma.userProfile.create({ data: record });
-    }
-
-    res.send('Data uploaded to PostgreSQL successfully.');
+    console.log('Data imported successfully');
+    return res.status(200).send('File uploaded and data imported successfully.');
   } catch (error) {
-    console.error(error);
-    res.status(500).send('An error occurred during upload.');
+    console.error('Error uploading and importing data:', error.message);
+    return res.status(500).send('An error occurred during upload and data import.');
   }
 });
 
-// ...
-
-
-// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
