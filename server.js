@@ -22,6 +22,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Route for uploading Excel file
+// ...
+
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     if (!req.file || !req.file.buffer) {
@@ -43,10 +45,14 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 
     const headers = rows[0];
+    if (!Array.isArray(headers)) {
+      return res.status(400).send('Headers are not in the correct format.');
+    }
+
     const data = rows.slice(1);
 
     for (const row of data) {
-      if (row.length !== headers.length) {
+      if (!Array.isArray(row) || row.length !== headers.length) {
         return res.status(400).send('Inconsistent data found in the Excel file.');
       }
 
@@ -64,6 +70,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     res.status(500).send('An error occurred during upload.');
   }
 });
+
+// ...
+
 
 // Start the server
 app.listen(port, () => {
