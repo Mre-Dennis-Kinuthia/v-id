@@ -64,6 +64,7 @@ nav a {
 /* Styling for about and contact sections */
 .container {
     max-width: 800px;
+    height: 580px;
     margin: 0 auto;
     padding: 40px;
     text-align: center;
