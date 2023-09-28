@@ -16,5 +16,4 @@ model UserProfile {
   Name      String
   Email     String    @unique
   Program   String
-  ImageUrl  String?
 }
