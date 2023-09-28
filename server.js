@@ -40,17 +40,16 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     await prisma.$transaction(async (prisma) => {
       for (let i = 0; i < rows.length; i++) {
-        const { Name, Email, Program, ImageUrl } = rows[i];
+        const { Name, Email, Program } = rows[i];
 
-        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program}, ImageUrl: ${ImageUrl}`);
+        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program},`);
 
-        if (Name && Email && Program && ImageUrl) {
+        if (Name && Email && Program) {
           await prisma.userProfile.create({
             data: {
               Name,
               Email,
               Program,
-              ImageUrl,
             },
           });
         } else {
