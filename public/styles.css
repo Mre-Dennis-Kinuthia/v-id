@@ -17,7 +17,7 @@ nav{
     top: 0;
     width: 100%;
     z-index: 3;
-    height: 50px;
+    height: 60px;
     font-size: 12px;
 }
 nav ul{
@@ -38,12 +38,10 @@ nav ul li a{
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: smaller;
 }
 .auth-btn-group{
-    display: flex;
-    justify-content: center;
-    align-items: right;
+    display: inline;
+    align-items: center;
 }
 .container{
     width: 100%;
