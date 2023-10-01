@@ -32,6 +32,16 @@ nav ul li a{
     color: #212529;
     font-size: 18px;
 }
+.main-btn-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.auth-btn-group{
+    display: flex;
+    justify-content: center;
+    align-items: right;
+}
 .container{
     width: 100%;
     max-width: 1200px;
