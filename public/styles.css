@@ -19,6 +19,8 @@ nav{
     z-index: 3;
     height: 60px;
     font-size: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: bold;
 }
 nav ul{
     list-style-type: none;
@@ -37,12 +39,17 @@ nav ul li a{
 .main-btn-group{
     position: absolute;
     top: 0;
-    left: 30%;
+    left: 25%;
 }
 .auth-btn-group{
-position: absolute;
-top:0;
-left: 80%;
+    position: absolute;
+    top:0;
+    left: 80%;
+}
+.btn-reg{
+    height: 25px;
+    width: 40px;
+    background-color: grey;
 }
 .container{
     width: 100%;
