@@ -81,12 +81,38 @@ app.post('/register', async (req, res) => {
         Institution,
       },
     });
-
+    
     console.log('User registered successfully');
     return res.status(200).send(user);
   } catch (error) {
     console.error('Error registering user:', error.message);
     return res.status(500).send('An error occurred during user registration.');
+  }
+});
+
+app.post('/login', async (req, res) => {
+  try {
+    const { Email } = req.body;
+
+    if (!Email) {
+      return res.status(400).send('Missing data.');
+    }
+
+    const user = await prisma.userProfile.findUnique({
+      where: {
+        Email,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+
+    console.log('User logged in successfully');
+    return res.status(200).send(user);
+  } catch (error) {
+    console.error('Error logging in user:', error.message);
+    return res.status(500).send('An error occurred during user login.');
   }
 });
 
