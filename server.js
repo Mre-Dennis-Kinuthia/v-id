@@ -66,6 +66,30 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   }
 });
 
+app.post('/register', async (req, res) => {
+  try {
+    const { Name, Email, Institution } = req.body;
+
+    if (!Name || !Email || !Institution) {
+      return res.status(400).send('Missing data.');
+    }
+
+    const user = await prisma.userProfile.create({
+      data: {
+        Name,
+        Email,
+        Institution,
+      },
+    });
+
+    console.log('User registered successfully');
+    return res.status(200).send(user);
+  } catch (error) {
+    console.error('Error registering user:', error.message);
+    return res.status(500).send('An error occurred during user registration.');
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

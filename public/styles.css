@@ -47,8 +47,8 @@ nav ul li a{
     left: 80%;
 }
 .btn-reg{
-    height: 25px;
-    width: 40px;
+    height: 50px;
+    width: 0px;
     background-color: grey;
 }
 .container{
