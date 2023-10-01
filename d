@@ -40,5 +40,5 @@ while true; do
   fi
 
   # Sleep for 1 hour before checking for changes again
-  sleep 120  # 3600 seconds = 1 hour
+  sleep 80  # 3600 seconds = 1 hour
 done
