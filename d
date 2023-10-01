@@ -10,25 +10,19 @@ print_red() {
   echo -e "\e[31m$1\e[0m"
 }
 
-# Set the default commit message and branch name
-default_commit_message="Committed from Codespace"
+# Set the branch name
 branch_name="main"
 
 # Infinite loop
 while true; do
-  # Prompt for a custom commit message
-  echo "Enter your commit message (or press Enter to use the default):"
-  read commit_message
-
-  # Set a default commit message if nothing is entered
-  if [ -z "$commit_message" ]; then
-    commit_message="$default_commit_message"
-  fi
-
   # Check if there are changes to commit
   if git diff --quiet; then
     print_red "No changes to commit."
   else
+    # Prompt for a custom commit message
+    echo "Enter your commit message:"
+    read commit_message
+
     # Add all changes and commit
     git add .
     git commit -m "$commit_message" || {
@@ -45,6 +39,6 @@ while true; do
     print_green "Changes pushed to the remote repository successfully."
   fi
 
-  # Sleep for 1 hour before prompting again
+  # Sleep for 1 hour before checking for changes again
   sleep 3600  # 3600 seconds = 1 hour
 done
