@@ -10,6 +10,10 @@ print_red() {
   echo -e "\e[31m$1\e[0m"
 }
 
+# Set the default commit message and branch name
+default_commit_message="Committed from Codespace"
+branch_name="main"
+
 # Infinite loop
 while true; do
   # Prompt for a custom commit message
@@ -18,7 +22,7 @@ while true; do
 
   # Set a default commit message if nothing is entered
   if [ -z "$commit_message" ]; then
-    commit_message="Committed from Codespace"
+    commit_message="$default_commit_message"
   fi
 
   # Check if there are changes to commit
@@ -34,7 +38,7 @@ while true; do
     print_green "Changes committed successfully with message: $commit_message"
 
     # Push changes to the remote repository
-    git push origin main || {
+    git push origin "$branch_name" || {
       print_red "Error: Push failed. Ensure you have the correct permissions and a valid remote."
       exit 1
     }
