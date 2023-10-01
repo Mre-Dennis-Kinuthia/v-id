@@ -42,5 +42,5 @@ while true; do
   fi
 
   # Sleep for 1 hour before prompting again
-  sleep 60  # 3600 seconds = 1 hour
+  sleep 3600  # 3600 seconds = 1 hour
 done
