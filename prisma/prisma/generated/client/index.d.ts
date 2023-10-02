@@ -1857,9 +1857,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMinAggregateOutputType = {
     id: number | null
-    Name: string | null
-    Email: string | null
-    Institution: string | null
+    institutionName: string | null
+    institutionEmail: string | null
     Programs: string | null
     Facilitator: string | null
     Username: string | null
@@ -1869,9 +1868,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMaxAggregateOutputType = {
     id: number | null
-    Name: string | null
-    Email: string | null
-    Institution: string | null
+    institutionName: string | null
+    institutionEmail: string | null
     Programs: string | null
     Facilitator: string | null
     Username: string | null
@@ -1881,9 +1879,8 @@ export namespace Prisma {
 
   export type InstitutionProfileCountAggregateOutputType = {
     id: number
-    Name: number
-    Email: number
-    Institution: number
+    institutionName: number
+    institutionEmail: number
     Programs: number
     Facilitator: number
     Username: number
@@ -1903,9 +1900,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMinAggregateInputType = {
     id?: true
-    Name?: true
-    Email?: true
-    Institution?: true
+    institutionName?: true
+    institutionEmail?: true
     Programs?: true
     Facilitator?: true
     Username?: true
@@ -1915,9 +1911,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMaxAggregateInputType = {
     id?: true
-    Name?: true
-    Email?: true
-    Institution?: true
+    institutionName?: true
+    institutionEmail?: true
     Programs?: true
     Facilitator?: true
     Username?: true
@@ -1927,9 +1922,8 @@ export namespace Prisma {
 
   export type InstitutionProfileCountAggregateInputType = {
     id?: true
-    Name?: true
-    Email?: true
-    Institution?: true
+    institutionName?: true
+    institutionEmail?: true
     Programs?: true
     Facilitator?: true
     Username?: true
@@ -2026,9 +2020,8 @@ export namespace Prisma {
 
   export type InstitutionProfileGroupByOutputType = {
     id: number
-    Name: string
-    Email: string
-    Institution: string
+    institutionName: string
+    institutionEmail: string
     Programs: string
     Facilitator: string
     Username: string
@@ -2057,9 +2050,8 @@ export namespace Prisma {
 
   export type InstitutionProfileSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    Name?: boolean
-    Email?: boolean
-    Institution?: boolean
+    institutionName?: boolean
+    institutionEmail?: boolean
     Programs?: boolean
     Facilitator?: boolean
     Username?: boolean
@@ -2069,9 +2061,8 @@ export namespace Prisma {
 
   export type InstitutionProfileSelectScalar = {
     id?: boolean
-    Name?: boolean
-    Email?: boolean
-    Institution?: boolean
+    institutionName?: boolean
+    institutionEmail?: boolean
     Programs?: boolean
     Facilitator?: boolean
     Username?: boolean
@@ -2085,9 +2076,8 @@ export namespace Prisma {
     objects: {}
     scalars: $Extensions.GetResult<{
       id: number
-      Name: string
-      Email: string
-      Institution: string
+      institutionName: string
+      institutionEmail: string
       Programs: string
       Facilitator: string
       Username: string
@@ -2488,9 +2478,8 @@ export namespace Prisma {
    */ 
   interface InstitutionProfileFieldRefs {
     readonly id: FieldRef<"InstitutionProfile", 'Int'>
-    readonly Name: FieldRef<"InstitutionProfile", 'String'>
-    readonly Email: FieldRef<"InstitutionProfile", 'String'>
-    readonly Institution: FieldRef<"InstitutionProfile", 'String'>
+    readonly institutionName: FieldRef<"InstitutionProfile", 'String'>
+    readonly institutionEmail: FieldRef<"InstitutionProfile", 'String'>
     readonly Programs: FieldRef<"InstitutionProfile", 'String'>
     readonly Facilitator: FieldRef<"InstitutionProfile", 'String'>
     readonly Username: FieldRef<"InstitutionProfile", 'String'>
@@ -2809,9 +2798,8 @@ export namespace Prisma {
 
   export const InstitutionProfileScalarFieldEnum: {
     id: 'id',
-    Name: 'Name',
-    Email: 'Email',
-    Institution: 'Institution',
+    institutionName: 'institutionName',
+    institutionEmail: 'institutionEmail',
     Programs: 'Programs',
     Facilitator: 'Facilitator',
     Username: 'Username',
@@ -2956,9 +2944,8 @@ export namespace Prisma {
     OR?: InstitutionProfileWhereInput[]
     NOT?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
     id?: IntFilter<"InstitutionProfile"> | number
-    Name?: StringFilter<"InstitutionProfile"> | string
-    Email?: StringFilter<"InstitutionProfile"> | string
-    Institution?: StringFilter<"InstitutionProfile"> | string
+    institutionName?: StringFilter<"InstitutionProfile"> | string
+    institutionEmail?: StringFilter<"InstitutionProfile"> | string
     Programs?: StringFilter<"InstitutionProfile"> | string
     Facilitator?: StringFilter<"InstitutionProfile"> | string
     Username?: StringFilter<"InstitutionProfile"> | string
@@ -2968,9 +2955,8 @@ export namespace Prisma {
 
   export type InstitutionProfileOrderByWithRelationInput = {
     id?: SortOrder
-    Name?: SortOrder
-    Email?: SortOrder
-    Institution?: SortOrder
+    institutionName?: SortOrder
+    institutionEmail?: SortOrder
     Programs?: SortOrder
     Facilitator?: SortOrder
     Username?: SortOrder
@@ -2980,24 +2966,22 @@ export namespace Prisma {
 
   export type InstitutionProfileWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    Email?: string
+    institutionEmail?: string
     AND?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
     OR?: InstitutionProfileWhereInput[]
     NOT?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
-    Name?: StringFilter<"InstitutionProfile"> | string
-    Institution?: StringFilter<"InstitutionProfile"> | string
+    institutionName?: StringFilter<"InstitutionProfile"> | string
     Programs?: StringFilter<"InstitutionProfile"> | string
     Facilitator?: StringFilter<"InstitutionProfile"> | string
     Username?: StringFilter<"InstitutionProfile"> | string
     Password?: StringFilter<"InstitutionProfile"> | string
     DateOfRegistration?: DateTimeFilter<"InstitutionProfile"> | Date | string
-  }, "id" | "Email">
+  }, "id" | "institutionEmail">
 
   export type InstitutionProfileOrderByWithAggregationInput = {
     id?: SortOrder
-    Name?: SortOrder
-    Email?: SortOrder
-    Institution?: SortOrder
+    institutionName?: SortOrder
+    institutionEmail?: SortOrder
     Programs?: SortOrder
     Facilitator?: SortOrder
     Username?: SortOrder
@@ -3015,9 +2999,8 @@ export namespace Prisma {
     OR?: InstitutionProfileScalarWhereWithAggregatesInput[]
     NOT?: InstitutionProfileScalarWhereWithAggregatesInput | InstitutionProfileScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"InstitutionProfile"> | number
-    Name?: StringWithAggregatesFilter<"InstitutionProfile"> | string
-    Email?: StringWithAggregatesFilter<"InstitutionProfile"> | string
-    Institution?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    institutionName?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    institutionEmail?: StringWithAggregatesFilter<"InstitutionProfile"> | string
     Programs?: StringWithAggregatesFilter<"InstitutionProfile"> | string
     Facilitator?: StringWithAggregatesFilter<"InstitutionProfile"> | string
     Username?: StringWithAggregatesFilter<"InstitutionProfile"> | string
@@ -3072,9 +3055,8 @@ export namespace Prisma {
   }
 
   export type InstitutionProfileCreateInput = {
-    Name: string
-    Email: string
-    Institution: string
+    institutionName: string
+    institutionEmail: string
     Programs: string
     Facilitator: string
     Username: string
@@ -3084,9 +3066,8 @@ export namespace Prisma {
 
   export type InstitutionProfileUncheckedCreateInput = {
     id?: number
-    Name: string
-    Email: string
-    Institution: string
+    institutionName: string
+    institutionEmail: string
     Programs: string
     Facilitator: string
     Username: string
@@ -3095,9 +3076,8 @@ export namespace Prisma {
   }
 
   export type InstitutionProfileUpdateInput = {
-    Name?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Institution?: StringFieldUpdateOperationsInput | string
+    institutionName?: StringFieldUpdateOperationsInput | string
+    institutionEmail?: StringFieldUpdateOperationsInput | string
     Programs?: StringFieldUpdateOperationsInput | string
     Facilitator?: StringFieldUpdateOperationsInput | string
     Username?: StringFieldUpdateOperationsInput | string
@@ -3107,9 +3087,8 @@ export namespace Prisma {
 
   export type InstitutionProfileUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Name?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Institution?: StringFieldUpdateOperationsInput | string
+    institutionName?: StringFieldUpdateOperationsInput | string
+    institutionEmail?: StringFieldUpdateOperationsInput | string
     Programs?: StringFieldUpdateOperationsInput | string
     Facilitator?: StringFieldUpdateOperationsInput | string
     Username?: StringFieldUpdateOperationsInput | string
@@ -3119,9 +3098,8 @@ export namespace Prisma {
 
   export type InstitutionProfileCreateManyInput = {
     id?: number
-    Name: string
-    Email: string
-    Institution: string
+    institutionName: string
+    institutionEmail: string
     Programs: string
     Facilitator: string
     Username: string
@@ -3130,9 +3108,8 @@ export namespace Prisma {
   }
 
   export type InstitutionProfileUpdateManyMutationInput = {
-    Name?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Institution?: StringFieldUpdateOperationsInput | string
+    institutionName?: StringFieldUpdateOperationsInput | string
+    institutionEmail?: StringFieldUpdateOperationsInput | string
     Programs?: StringFieldUpdateOperationsInput | string
     Facilitator?: StringFieldUpdateOperationsInput | string
     Username?: StringFieldUpdateOperationsInput | string
@@ -3142,9 +3119,8 @@ export namespace Prisma {
 
   export type InstitutionProfileUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    Name?: StringFieldUpdateOperationsInput | string
-    Email?: StringFieldUpdateOperationsInput | string
-    Institution?: StringFieldUpdateOperationsInput | string
+    institutionName?: StringFieldUpdateOperationsInput | string
+    institutionEmail?: StringFieldUpdateOperationsInput | string
     Programs?: StringFieldUpdateOperationsInput | string
     Facilitator?: StringFieldUpdateOperationsInput | string
     Username?: StringFieldUpdateOperationsInput | string
@@ -3254,9 +3230,8 @@ export namespace Prisma {
 
   export type InstitutionProfileCountOrderByAggregateInput = {
     id?: SortOrder
-    Name?: SortOrder
-    Email?: SortOrder
-    Institution?: SortOrder
+    institutionName?: SortOrder
+    institutionEmail?: SortOrder
     Programs?: SortOrder
     Facilitator?: SortOrder
     Username?: SortOrder
@@ -3270,9 +3245,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMaxOrderByAggregateInput = {
     id?: SortOrder
-    Name?: SortOrder
-    Email?: SortOrder
-    Institution?: SortOrder
+    institutionName?: SortOrder
+    institutionEmail?: SortOrder
     Programs?: SortOrder
     Facilitator?: SortOrder
     Username?: SortOrder
@@ -3282,9 +3256,8 @@ export namespace Prisma {
 
   export type InstitutionProfileMinOrderByAggregateInput = {
     id?: SortOrder
-    Name?: SortOrder
-    Email?: SortOrder
-    Institution?: SortOrder
+    institutionName?: SortOrder
+    institutionEmail?: SortOrder
     Programs?: SortOrder
     Facilitator?: SortOrder
     Username?: SortOrder

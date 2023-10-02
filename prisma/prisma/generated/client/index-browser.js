@@ -116,9 +116,8 @@ exports.Prisma.UserProfileScalarFieldEnum = {
 
 exports.Prisma.InstitutionProfileScalarFieldEnum = {
   id: 'id',
-  Name: 'Name',
-  Email: 'Email',
-  Institution: 'Institution',
+  institutionName: 'institutionName',
+  institutionEmail: 'institutionEmail',
   Programs: 'Programs',
   Facilitator: 'Facilitator',
   Username: 'Username',
