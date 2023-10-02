@@ -57,7 +57,7 @@ app.post('/register', async (req, res) => {
       data: {
         name: institutionName,
         email,
-institutionName,
+        institutionName,
         programs,
         facilitator,
         username,
