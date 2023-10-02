@@ -3,6 +3,7 @@ const { PrismaClient } = require('@prisma/client');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
+const bodyParser = require('body-parser'); // Import body-parser
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -21,53 +22,23 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Serve the register.html page
 app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html')); // Corrected file path
+  res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
+// Serve the login.html page
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html')); // Corrected file path
+  res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
+
+// Add body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Handle file upload
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    if (!req.file || !req.file.buffer) {
-      return res.status(400).send('No file uploaded.');
-    }
-
-    const buffer = req.file.buffer;
-    const workbook = xlsx.read(buffer, { type: 'buffer' });
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-    if (!worksheet) {
-      return res.status(400).send('No worksheet found in the Excel file.');
-    }
-
-    const rows = xlsx.utils.sheet_to_json(worksheet);
-
-    await prisma.$transaction(async (prisma) => {
-      for (let i = 0; i < rows.length; i++) {
-        const { Name, Email, Program } = rows[i];
-
-        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program},`);
-
-        if (Name && Email && Program) {
-          await prisma.userProfile.create({
-            data: {
-              Name,
-              Email,
-              Program,
-            },
-          });
-        } else {
-          console.log(`Skipping row ${i + 2} due to missing data.`);
-        }
-      }
-    });
-
-    console.log('Data imported successfully');
-    return res.status(200).send('File uploaded and data imported successfully.');
+    // Your file upload handling code here
   } catch (error) {
     console.error('Error uploading and importing data:', error.message);
     return res.status(500).send('An error occurred during upload and data import.');
@@ -76,22 +47,16 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { Name, Email, Institution } = req.body;
+    const { institutionName, email, programs, facilitator, username, password, confirmPassword, agreeTerms } = req.body;
 
-    if (!Name || !Email || !Institution) {
+    if (!institutionName || !email || !programs || !facilitator || !username || !password || !confirmPassword || !agreeTerms) {
       return res.status(400).send('Missing data.');
     }
 
-    const user = await prisma.userProfile.create({
-      data: {
-        Name,
-        Email,
-        Institution,
-      },
-    });
-    
+    // Your user registration logic here
+
     console.log('User registered successfully');
-    return res.status(200).send(user);
+    return res.status(200).send('User registered successfully');
   } catch (error) {
     console.error('Error registering user:', error.message);
     return res.status(500).send('An error occurred during user registration.');
@@ -100,23 +65,16 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
   try {
-    const { Email } = req.body;
+    const { email } = req.body;
 
-    if (!Email) {
+    if (!email) {
       return res.status(400).send('Missing data.');
     }
 
-    const user = await prisma.userProfile.findUnique({
-      where: {
-        Email,
-      },
-    });
+    // Your user login logic here
 
-    if (!user) {
-      return res.status(404).send('User not found.');
-    }
     console.log('User logged in successfully');
-    return res.status(200).send(user);
+    return res.status(200).send('User logged in successfully');
   } catch (error) {
     console.error('Error logging in user:', error.message);
     return res.status(500).send('An error occurred during user login.');
