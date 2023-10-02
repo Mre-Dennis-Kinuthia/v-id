@@ -21,6 +21,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'register.html')); // Corrected file path
+});
+
 // Handle file upload
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
@@ -107,7 +111,6 @@ app.post('/login', async (req, res) => {
     if (!user) {
       return res.status(404).send('User not found.');
     }
-
     console.log('User logged in successfully');
     return res.status(200).send(user);
   } catch (error) {

@@ -17,3 +17,16 @@ model UserProfile {
   Email     String    @unique
   Program   String
 }
+// prisma/schema.prisma
+
+model InstitutionProfile {
+  id             Int       @id @default(autoincrement())
+  Name           String
+  Email          String    @unique
+  Institution    String
+  Programs       String
+  Facilitator    String
+  Username       String
+  Password       String
+  DateOfRegistration DateTime @default(now())
+}

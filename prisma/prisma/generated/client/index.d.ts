@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type UserProfile = $Result.DefaultSelection<Prisma.$UserProfilePayload>
+/**
+ * Model InstitutionProfile
+ * 
+ */
+export type InstitutionProfile = $Result.DefaultSelection<Prisma.$InstitutionProfilePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -150,6 +155,16 @@ export class PrismaClient<
     * ```
     */
   get userProfile(): Prisma.UserProfileDelegate<ExtArgs>;
+
+  /**
+   * `prisma.institutionProfile`: Exposes CRUD operations for the **InstitutionProfile** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InstitutionProfiles
+    * const institutionProfiles = await prisma.institutionProfile.findMany()
+    * ```
+    */
+  get institutionProfile(): Prisma.InstitutionProfileDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -208,7 +223,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.3.1
-   * Query Engine version: 2804dc98259d2ea960602aca6b8e7fdc03c1758f
+   * Query Engine version: 61e140623197a131c2a6189271ffee05a7aa9a59
    */
   export type PrismaVersion = {
     client: string
@@ -620,7 +635,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    UserProfile: 'UserProfile'
+    UserProfile: 'UserProfile',
+    InstitutionProfile: 'InstitutionProfile'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -637,7 +653,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'userProfile'
+      modelProps: 'userProfile' | 'institutionProfile'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -704,6 +720,72 @@ export namespace Prisma {
           count: {
             args: Prisma.UserProfileCountArgs<ExtArgs>,
             result: $Utils.Optional<UserProfileCountAggregateOutputType> | number
+          }
+        }
+      }
+      InstitutionProfile: {
+        payload: Prisma.$InstitutionProfilePayload<ExtArgs>
+        fields: Prisma.InstitutionProfileFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InstitutionProfileFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InstitutionProfileFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          findFirst: {
+            args: Prisma.InstitutionProfileFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InstitutionProfileFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          findMany: {
+            args: Prisma.InstitutionProfileFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>[]
+          }
+          create: {
+            args: Prisma.InstitutionProfileCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          createMany: {
+            args: Prisma.InstitutionProfileCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.InstitutionProfileDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          update: {
+            args: Prisma.InstitutionProfileUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          deleteMany: {
+            args: Prisma.InstitutionProfileDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InstitutionProfileUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.InstitutionProfileUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$InstitutionProfilePayload>
+          }
+          aggregate: {
+            args: Prisma.InstitutionProfileAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateInstitutionProfile>
+          }
+          groupBy: {
+            args: Prisma.InstitutionProfileGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<InstitutionProfileGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InstitutionProfileCountArgs<ExtArgs>,
+            result: $Utils.Optional<InstitutionProfileCountAggregateOutputType> | number
           }
         }
       }
@@ -885,7 +967,6 @@ export namespace Prisma {
     Name: string | null
     Email: string | null
     Program: string | null
-    ImageUrl: string | null
   }
 
   export type UserProfileMaxAggregateOutputType = {
@@ -893,7 +974,6 @@ export namespace Prisma {
     Name: string | null
     Email: string | null
     Program: string | null
-    ImageUrl: string | null
   }
 
   export type UserProfileCountAggregateOutputType = {
@@ -901,7 +981,6 @@ export namespace Prisma {
     Name: number
     Email: number
     Program: number
-    ImageUrl: number
     _all: number
   }
 
@@ -919,7 +998,6 @@ export namespace Prisma {
     Name?: true
     Email?: true
     Program?: true
-    ImageUrl?: true
   }
 
   export type UserProfileMaxAggregateInputType = {
@@ -927,7 +1005,6 @@ export namespace Prisma {
     Name?: true
     Email?: true
     Program?: true
-    ImageUrl?: true
   }
 
   export type UserProfileCountAggregateInputType = {
@@ -935,7 +1012,6 @@ export namespace Prisma {
     Name?: true
     Email?: true
     Program?: true
-    ImageUrl?: true
     _all?: true
   }
 
@@ -1030,7 +1106,6 @@ export namespace Prisma {
     Name: string
     Email: string
     Program: string
-    ImageUrl: string | null
     _count: UserProfileCountAggregateOutputType | null
     _avg: UserProfileAvgAggregateOutputType | null
     _sum: UserProfileSumAggregateOutputType | null
@@ -1057,7 +1132,6 @@ export namespace Prisma {
     Name?: boolean
     Email?: boolean
     Program?: boolean
-    ImageUrl?: boolean
   }, ExtArgs["result"]["userProfile"]>
 
   export type UserProfileSelectScalar = {
@@ -1065,7 +1139,6 @@ export namespace Prisma {
     Name?: boolean
     Email?: boolean
     Program?: boolean
-    ImageUrl?: boolean
   }
 
 
@@ -1077,7 +1150,6 @@ export namespace Prisma {
       Name: string
       Email: string
       Program: string
-      ImageUrl: string | null
     }, ExtArgs["result"]["userProfile"]>
     composites: {}
   }
@@ -1476,7 +1548,6 @@ export namespace Prisma {
     readonly Name: FieldRef<"UserProfile", 'String'>
     readonly Email: FieldRef<"UserProfile", 'String'>
     readonly Program: FieldRef<"UserProfile", 'String'>
-    readonly ImageUrl: FieldRef<"UserProfile", 'String'>
   }
     
 
@@ -1765,6 +1836,954 @@ export namespace Prisma {
 
 
   /**
+   * Model InstitutionProfile
+   */
+
+  export type AggregateInstitutionProfile = {
+    _count: InstitutionProfileCountAggregateOutputType | null
+    _avg: InstitutionProfileAvgAggregateOutputType | null
+    _sum: InstitutionProfileSumAggregateOutputType | null
+    _min: InstitutionProfileMinAggregateOutputType | null
+    _max: InstitutionProfileMaxAggregateOutputType | null
+  }
+
+  export type InstitutionProfileAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type InstitutionProfileSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type InstitutionProfileMinAggregateOutputType = {
+    id: number | null
+    Name: string | null
+    Email: string | null
+    Institution: string | null
+    Programs: string | null
+    Facilitator: string | null
+    Username: string | null
+    Password: string | null
+    DateOfRegistration: Date | null
+  }
+
+  export type InstitutionProfileMaxAggregateOutputType = {
+    id: number | null
+    Name: string | null
+    Email: string | null
+    Institution: string | null
+    Programs: string | null
+    Facilitator: string | null
+    Username: string | null
+    Password: string | null
+    DateOfRegistration: Date | null
+  }
+
+  export type InstitutionProfileCountAggregateOutputType = {
+    id: number
+    Name: number
+    Email: number
+    Institution: number
+    Programs: number
+    Facilitator: number
+    Username: number
+    Password: number
+    DateOfRegistration: number
+    _all: number
+  }
+
+
+  export type InstitutionProfileAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type InstitutionProfileSumAggregateInputType = {
+    id?: true
+  }
+
+  export type InstitutionProfileMinAggregateInputType = {
+    id?: true
+    Name?: true
+    Email?: true
+    Institution?: true
+    Programs?: true
+    Facilitator?: true
+    Username?: true
+    Password?: true
+    DateOfRegistration?: true
+  }
+
+  export type InstitutionProfileMaxAggregateInputType = {
+    id?: true
+    Name?: true
+    Email?: true
+    Institution?: true
+    Programs?: true
+    Facilitator?: true
+    Username?: true
+    Password?: true
+    DateOfRegistration?: true
+  }
+
+  export type InstitutionProfileCountAggregateInputType = {
+    id?: true
+    Name?: true
+    Email?: true
+    Institution?: true
+    Programs?: true
+    Facilitator?: true
+    Username?: true
+    Password?: true
+    DateOfRegistration?: true
+    _all?: true
+  }
+
+  export type InstitutionProfileAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstitutionProfile to aggregate.
+     */
+    where?: InstitutionProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstitutionProfiles to fetch.
+     */
+    orderBy?: InstitutionProfileOrderByWithRelationInput | InstitutionProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InstitutionProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstitutionProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstitutionProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InstitutionProfiles
+    **/
+    _count?: true | InstitutionProfileCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InstitutionProfileAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InstitutionProfileSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InstitutionProfileMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InstitutionProfileMaxAggregateInputType
+  }
+
+  export type GetInstitutionProfileAggregateType<T extends InstitutionProfileAggregateArgs> = {
+        [P in keyof T & keyof AggregateInstitutionProfile]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInstitutionProfile[P]>
+      : GetScalarType<T[P], AggregateInstitutionProfile[P]>
+  }
+
+
+
+
+  export type InstitutionProfileGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: InstitutionProfileWhereInput
+    orderBy?: InstitutionProfileOrderByWithAggregationInput | InstitutionProfileOrderByWithAggregationInput[]
+    by: InstitutionProfileScalarFieldEnum[] | InstitutionProfileScalarFieldEnum
+    having?: InstitutionProfileScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InstitutionProfileCountAggregateInputType | true
+    _avg?: InstitutionProfileAvgAggregateInputType
+    _sum?: InstitutionProfileSumAggregateInputType
+    _min?: InstitutionProfileMinAggregateInputType
+    _max?: InstitutionProfileMaxAggregateInputType
+  }
+
+  export type InstitutionProfileGroupByOutputType = {
+    id: number
+    Name: string
+    Email: string
+    Institution: string
+    Programs: string
+    Facilitator: string
+    Username: string
+    Password: string
+    DateOfRegistration: Date
+    _count: InstitutionProfileCountAggregateOutputType | null
+    _avg: InstitutionProfileAvgAggregateOutputType | null
+    _sum: InstitutionProfileSumAggregateOutputType | null
+    _min: InstitutionProfileMinAggregateOutputType | null
+    _max: InstitutionProfileMaxAggregateOutputType | null
+  }
+
+  type GetInstitutionProfileGroupByPayload<T extends InstitutionProfileGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InstitutionProfileGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InstitutionProfileGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InstitutionProfileGroupByOutputType[P]>
+            : GetScalarType<T[P], InstitutionProfileGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InstitutionProfileSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    Name?: boolean
+    Email?: boolean
+    Institution?: boolean
+    Programs?: boolean
+    Facilitator?: boolean
+    Username?: boolean
+    Password?: boolean
+    DateOfRegistration?: boolean
+  }, ExtArgs["result"]["institutionProfile"]>
+
+  export type InstitutionProfileSelectScalar = {
+    id?: boolean
+    Name?: boolean
+    Email?: boolean
+    Institution?: boolean
+    Programs?: boolean
+    Facilitator?: boolean
+    Username?: boolean
+    Password?: boolean
+    DateOfRegistration?: boolean
+  }
+
+
+  export type $InstitutionProfilePayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "InstitutionProfile"
+    objects: {}
+    scalars: $Extensions.GetResult<{
+      id: number
+      Name: string
+      Email: string
+      Institution: string
+      Programs: string
+      Facilitator: string
+      Username: string
+      Password: string
+      DateOfRegistration: Date
+    }, ExtArgs["result"]["institutionProfile"]>
+    composites: {}
+  }
+
+
+  type InstitutionProfileGetPayload<S extends boolean | null | undefined | InstitutionProfileDefaultArgs> = $Result.GetResult<Prisma.$InstitutionProfilePayload, S>
+
+  type InstitutionProfileCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<InstitutionProfileFindManyArgs, 'select' | 'include'> & {
+      select?: InstitutionProfileCountAggregateInputType | true
+    }
+
+  export interface InstitutionProfileDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InstitutionProfile'], meta: { name: 'InstitutionProfile' } }
+    /**
+     * Find zero or one InstitutionProfile that matches the filter.
+     * @param {InstitutionProfileFindUniqueArgs} args - Arguments to find a InstitutionProfile
+     * @example
+     * // Get one InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends InstitutionProfileFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileFindUniqueArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one InstitutionProfile that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {InstitutionProfileFindUniqueOrThrowArgs} args - Arguments to find a InstitutionProfile
+     * @example
+     * // Get one InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends InstitutionProfileFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first InstitutionProfile that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileFindFirstArgs} args - Arguments to find a InstitutionProfile
+     * @example
+     * // Get one InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends InstitutionProfileFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileFindFirstArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first InstitutionProfile that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileFindFirstOrThrowArgs} args - Arguments to find a InstitutionProfile
+     * @example
+     * // Get one InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends InstitutionProfileFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more InstitutionProfiles that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InstitutionProfiles
+     * const institutionProfiles = await prisma.institutionProfile.findMany()
+     * 
+     * // Get first 10 InstitutionProfiles
+     * const institutionProfiles = await prisma.institutionProfile.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const institutionProfileWithIdOnly = await prisma.institutionProfile.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends InstitutionProfileFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a InstitutionProfile.
+     * @param {InstitutionProfileCreateArgs} args - Arguments to create a InstitutionProfile.
+     * @example
+     * // Create one InstitutionProfile
+     * const InstitutionProfile = await prisma.institutionProfile.create({
+     *   data: {
+     *     // ... data to create a InstitutionProfile
+     *   }
+     * })
+     * 
+    **/
+    create<T extends InstitutionProfileCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileCreateArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many InstitutionProfiles.
+     *     @param {InstitutionProfileCreateManyArgs} args - Arguments to create many InstitutionProfiles.
+     *     @example
+     *     // Create many InstitutionProfiles
+     *     const institutionProfile = await prisma.institutionProfile.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends InstitutionProfileCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a InstitutionProfile.
+     * @param {InstitutionProfileDeleteArgs} args - Arguments to delete one InstitutionProfile.
+     * @example
+     * // Delete one InstitutionProfile
+     * const InstitutionProfile = await prisma.institutionProfile.delete({
+     *   where: {
+     *     // ... filter to delete one InstitutionProfile
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends InstitutionProfileDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileDeleteArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one InstitutionProfile.
+     * @param {InstitutionProfileUpdateArgs} args - Arguments to update one InstitutionProfile.
+     * @example
+     * // Update one InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends InstitutionProfileUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileUpdateArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more InstitutionProfiles.
+     * @param {InstitutionProfileDeleteManyArgs} args - Arguments to filter InstitutionProfiles to delete.
+     * @example
+     * // Delete a few InstitutionProfiles
+     * const { count } = await prisma.institutionProfile.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends InstitutionProfileDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, InstitutionProfileDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InstitutionProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InstitutionProfiles
+     * const institutionProfile = await prisma.institutionProfile.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends InstitutionProfileUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one InstitutionProfile.
+     * @param {InstitutionProfileUpsertArgs} args - Arguments to update or create a InstitutionProfile.
+     * @example
+     * // Update or create a InstitutionProfile
+     * const institutionProfile = await prisma.institutionProfile.upsert({
+     *   create: {
+     *     // ... data to create a InstitutionProfile
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InstitutionProfile we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends InstitutionProfileUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, InstitutionProfileUpsertArgs<ExtArgs>>
+    ): Prisma__InstitutionProfileClient<$Result.GetResult<Prisma.$InstitutionProfilePayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of InstitutionProfiles.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileCountArgs} args - Arguments to filter InstitutionProfiles to count.
+     * @example
+     * // Count the number of InstitutionProfiles
+     * const count = await prisma.institutionProfile.count({
+     *   where: {
+     *     // ... the filter for the InstitutionProfiles we want to count
+     *   }
+     * })
+    **/
+    count<T extends InstitutionProfileCountArgs>(
+      args?: Subset<T, InstitutionProfileCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InstitutionProfileCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InstitutionProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InstitutionProfileAggregateArgs>(args: Subset<T, InstitutionProfileAggregateArgs>): Prisma.PrismaPromise<GetInstitutionProfileAggregateType<T>>
+
+    /**
+     * Group by InstitutionProfile.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InstitutionProfileGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InstitutionProfileGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InstitutionProfileGroupByArgs['orderBy'] }
+        : { orderBy?: InstitutionProfileGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InstitutionProfileGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInstitutionProfileGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InstitutionProfile model
+   */
+  readonly fields: InstitutionProfileFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InstitutionProfile.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InstitutionProfileClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the InstitutionProfile model
+   */ 
+  interface InstitutionProfileFieldRefs {
+    readonly id: FieldRef<"InstitutionProfile", 'Int'>
+    readonly Name: FieldRef<"InstitutionProfile", 'String'>
+    readonly Email: FieldRef<"InstitutionProfile", 'String'>
+    readonly Institution: FieldRef<"InstitutionProfile", 'String'>
+    readonly Programs: FieldRef<"InstitutionProfile", 'String'>
+    readonly Facilitator: FieldRef<"InstitutionProfile", 'String'>
+    readonly Username: FieldRef<"InstitutionProfile", 'String'>
+    readonly Password: FieldRef<"InstitutionProfile", 'String'>
+    readonly DateOfRegistration: FieldRef<"InstitutionProfile", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * InstitutionProfile findUnique
+   */
+  export type InstitutionProfileFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter, which InstitutionProfile to fetch.
+     */
+    where: InstitutionProfileWhereUniqueInput
+  }
+
+
+  /**
+   * InstitutionProfile findUniqueOrThrow
+   */
+  export type InstitutionProfileFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter, which InstitutionProfile to fetch.
+     */
+    where: InstitutionProfileWhereUniqueInput
+  }
+
+
+  /**
+   * InstitutionProfile findFirst
+   */
+  export type InstitutionProfileFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter, which InstitutionProfile to fetch.
+     */
+    where?: InstitutionProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstitutionProfiles to fetch.
+     */
+    orderBy?: InstitutionProfileOrderByWithRelationInput | InstitutionProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstitutionProfiles.
+     */
+    cursor?: InstitutionProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstitutionProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstitutionProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstitutionProfiles.
+     */
+    distinct?: InstitutionProfileScalarFieldEnum | InstitutionProfileScalarFieldEnum[]
+  }
+
+
+  /**
+   * InstitutionProfile findFirstOrThrow
+   */
+  export type InstitutionProfileFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter, which InstitutionProfile to fetch.
+     */
+    where?: InstitutionProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstitutionProfiles to fetch.
+     */
+    orderBy?: InstitutionProfileOrderByWithRelationInput | InstitutionProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InstitutionProfiles.
+     */
+    cursor?: InstitutionProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstitutionProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstitutionProfiles.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InstitutionProfiles.
+     */
+    distinct?: InstitutionProfileScalarFieldEnum | InstitutionProfileScalarFieldEnum[]
+  }
+
+
+  /**
+   * InstitutionProfile findMany
+   */
+  export type InstitutionProfileFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter, which InstitutionProfiles to fetch.
+     */
+    where?: InstitutionProfileWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InstitutionProfiles to fetch.
+     */
+    orderBy?: InstitutionProfileOrderByWithRelationInput | InstitutionProfileOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InstitutionProfiles.
+     */
+    cursor?: InstitutionProfileWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InstitutionProfiles from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InstitutionProfiles.
+     */
+    skip?: number
+    distinct?: InstitutionProfileScalarFieldEnum | InstitutionProfileScalarFieldEnum[]
+  }
+
+
+  /**
+   * InstitutionProfile create
+   */
+  export type InstitutionProfileCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * The data needed to create a InstitutionProfile.
+     */
+    data: XOR<InstitutionProfileCreateInput, InstitutionProfileUncheckedCreateInput>
+  }
+
+
+  /**
+   * InstitutionProfile createMany
+   */
+  export type InstitutionProfileCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InstitutionProfiles.
+     */
+    data: InstitutionProfileCreateManyInput | InstitutionProfileCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * InstitutionProfile update
+   */
+  export type InstitutionProfileUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * The data needed to update a InstitutionProfile.
+     */
+    data: XOR<InstitutionProfileUpdateInput, InstitutionProfileUncheckedUpdateInput>
+    /**
+     * Choose, which InstitutionProfile to update.
+     */
+    where: InstitutionProfileWhereUniqueInput
+  }
+
+
+  /**
+   * InstitutionProfile updateMany
+   */
+  export type InstitutionProfileUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InstitutionProfiles.
+     */
+    data: XOR<InstitutionProfileUpdateManyMutationInput, InstitutionProfileUncheckedUpdateManyInput>
+    /**
+     * Filter which InstitutionProfiles to update
+     */
+    where?: InstitutionProfileWhereInput
+  }
+
+
+  /**
+   * InstitutionProfile upsert
+   */
+  export type InstitutionProfileUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * The filter to search for the InstitutionProfile to update in case it exists.
+     */
+    where: InstitutionProfileWhereUniqueInput
+    /**
+     * In case the InstitutionProfile found by the `where` argument doesn't exist, create a new InstitutionProfile with this data.
+     */
+    create: XOR<InstitutionProfileCreateInput, InstitutionProfileUncheckedCreateInput>
+    /**
+     * In case the InstitutionProfile was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InstitutionProfileUpdateInput, InstitutionProfileUncheckedUpdateInput>
+  }
+
+
+  /**
+   * InstitutionProfile delete
+   */
+  export type InstitutionProfileDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+    /**
+     * Filter which InstitutionProfile to delete.
+     */
+    where: InstitutionProfileWhereUniqueInput
+  }
+
+
+  /**
+   * InstitutionProfile deleteMany
+   */
+  export type InstitutionProfileDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InstitutionProfiles to delete
+     */
+    where?: InstitutionProfileWhereInput
+  }
+
+
+  /**
+   * InstitutionProfile without action
+   */
+  export type InstitutionProfileDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InstitutionProfile
+     */
+    select?: InstitutionProfileSelect<ExtArgs> | null
+  }
+
+
+
+  /**
    * Enums
    */
 
@@ -1782,11 +2801,25 @@ export namespace Prisma {
     id: 'id',
     Name: 'Name',
     Email: 'Email',
-    Program: 'Program',
-    ImageUrl: 'ImageUrl'
+    Program: 'Program'
   };
 
   export type UserProfileScalarFieldEnum = (typeof UserProfileScalarFieldEnum)[keyof typeof UserProfileScalarFieldEnum]
+
+
+  export const InstitutionProfileScalarFieldEnum: {
+    id: 'id',
+    Name: 'Name',
+    Email: 'Email',
+    Institution: 'Institution',
+    Programs: 'Programs',
+    Facilitator: 'Facilitator',
+    Username: 'Username',
+    Password: 'Password',
+    DateOfRegistration: 'DateOfRegistration'
+  };
+
+  export type InstitutionProfileScalarFieldEnum = (typeof InstitutionProfileScalarFieldEnum)[keyof typeof InstitutionProfileScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1803,14 +2836,6 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -1847,6 +2872,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1871,7 +2910,6 @@ export namespace Prisma {
     Name?: StringFilter<"UserProfile"> | string
     Email?: StringFilter<"UserProfile"> | string
     Program?: StringFilter<"UserProfile"> | string
-    ImageUrl?: StringNullableFilter<"UserProfile"> | string | null
   }
 
   export type UserProfileOrderByWithRelationInput = {
@@ -1879,7 +2917,6 @@ export namespace Prisma {
     Name?: SortOrder
     Email?: SortOrder
     Program?: SortOrder
-    ImageUrl?: SortOrderInput | SortOrder
   }
 
   export type UserProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -1890,7 +2927,6 @@ export namespace Prisma {
     NOT?: UserProfileWhereInput | UserProfileWhereInput[]
     Name?: StringFilter<"UserProfile"> | string
     Program?: StringFilter<"UserProfile"> | string
-    ImageUrl?: StringNullableFilter<"UserProfile"> | string | null
   }, "id" | "Email">
 
   export type UserProfileOrderByWithAggregationInput = {
@@ -1898,7 +2934,6 @@ export namespace Prisma {
     Name?: SortOrder
     Email?: SortOrder
     Program?: SortOrder
-    ImageUrl?: SortOrderInput | SortOrder
     _count?: UserProfileCountOrderByAggregateInput
     _avg?: UserProfileAvgOrderByAggregateInput
     _max?: UserProfileMaxOrderByAggregateInput
@@ -1914,14 +2949,86 @@ export namespace Prisma {
     Name?: StringWithAggregatesFilter<"UserProfile"> | string
     Email?: StringWithAggregatesFilter<"UserProfile"> | string
     Program?: StringWithAggregatesFilter<"UserProfile"> | string
-    ImageUrl?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
+  }
+
+  export type InstitutionProfileWhereInput = {
+    AND?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
+    OR?: InstitutionProfileWhereInput[]
+    NOT?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
+    id?: IntFilter<"InstitutionProfile"> | number
+    Name?: StringFilter<"InstitutionProfile"> | string
+    Email?: StringFilter<"InstitutionProfile"> | string
+    Institution?: StringFilter<"InstitutionProfile"> | string
+    Programs?: StringFilter<"InstitutionProfile"> | string
+    Facilitator?: StringFilter<"InstitutionProfile"> | string
+    Username?: StringFilter<"InstitutionProfile"> | string
+    Password?: StringFilter<"InstitutionProfile"> | string
+    DateOfRegistration?: DateTimeFilter<"InstitutionProfile"> | Date | string
+  }
+
+  export type InstitutionProfileOrderByWithRelationInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    Email?: SortOrder
+    Institution?: SortOrder
+    Programs?: SortOrder
+    Facilitator?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    DateOfRegistration?: SortOrder
+  }
+
+  export type InstitutionProfileWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    Email?: string
+    AND?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
+    OR?: InstitutionProfileWhereInput[]
+    NOT?: InstitutionProfileWhereInput | InstitutionProfileWhereInput[]
+    Name?: StringFilter<"InstitutionProfile"> | string
+    Institution?: StringFilter<"InstitutionProfile"> | string
+    Programs?: StringFilter<"InstitutionProfile"> | string
+    Facilitator?: StringFilter<"InstitutionProfile"> | string
+    Username?: StringFilter<"InstitutionProfile"> | string
+    Password?: StringFilter<"InstitutionProfile"> | string
+    DateOfRegistration?: DateTimeFilter<"InstitutionProfile"> | Date | string
+  }, "id" | "Email">
+
+  export type InstitutionProfileOrderByWithAggregationInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    Email?: SortOrder
+    Institution?: SortOrder
+    Programs?: SortOrder
+    Facilitator?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    DateOfRegistration?: SortOrder
+    _count?: InstitutionProfileCountOrderByAggregateInput
+    _avg?: InstitutionProfileAvgOrderByAggregateInput
+    _max?: InstitutionProfileMaxOrderByAggregateInput
+    _min?: InstitutionProfileMinOrderByAggregateInput
+    _sum?: InstitutionProfileSumOrderByAggregateInput
+  }
+
+  export type InstitutionProfileScalarWhereWithAggregatesInput = {
+    AND?: InstitutionProfileScalarWhereWithAggregatesInput | InstitutionProfileScalarWhereWithAggregatesInput[]
+    OR?: InstitutionProfileScalarWhereWithAggregatesInput[]
+    NOT?: InstitutionProfileScalarWhereWithAggregatesInput | InstitutionProfileScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"InstitutionProfile"> | number
+    Name?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Email?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Institution?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Programs?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Facilitator?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Username?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    Password?: StringWithAggregatesFilter<"InstitutionProfile"> | string
+    DateOfRegistration?: DateTimeWithAggregatesFilter<"InstitutionProfile"> | Date | string
   }
 
   export type UserProfileCreateInput = {
     Name: string
     Email: string
     Program: string
-    ImageUrl?: string | null
   }
 
   export type UserProfileUncheckedCreateInput = {
@@ -1929,14 +3036,12 @@ export namespace Prisma {
     Name: string
     Email: string
     Program: string
-    ImageUrl?: string | null
   }
 
   export type UserProfileUpdateInput = {
     Name?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Program?: StringFieldUpdateOperationsInput | string
-    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserProfileUncheckedUpdateInput = {
@@ -1944,7 +3049,6 @@ export namespace Prisma {
     Name?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Program?: StringFieldUpdateOperationsInput | string
-    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserProfileCreateManyInput = {
@@ -1952,14 +3056,12 @@ export namespace Prisma {
     Name: string
     Email: string
     Program: string
-    ImageUrl?: string | null
   }
 
   export type UserProfileUpdateManyMutationInput = {
     Name?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Program?: StringFieldUpdateOperationsInput | string
-    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserProfileUncheckedUpdateManyInput = {
@@ -1967,7 +3069,87 @@ export namespace Prisma {
     Name?: StringFieldUpdateOperationsInput | string
     Email?: StringFieldUpdateOperationsInput | string
     Program?: StringFieldUpdateOperationsInput | string
-    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InstitutionProfileCreateInput = {
+    Name: string
+    Email: string
+    Institution: string
+    Programs: string
+    Facilitator: string
+    Username: string
+    Password: string
+    DateOfRegistration?: Date | string
+  }
+
+  export type InstitutionProfileUncheckedCreateInput = {
+    id?: number
+    Name: string
+    Email: string
+    Institution: string
+    Programs: string
+    Facilitator: string
+    Username: string
+    Password: string
+    DateOfRegistration?: Date | string
+  }
+
+  export type InstitutionProfileUpdateInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Email?: StringFieldUpdateOperationsInput | string
+    Institution?: StringFieldUpdateOperationsInput | string
+    Programs?: StringFieldUpdateOperationsInput | string
+    Facilitator?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    DateOfRegistration?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstitutionProfileUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Email?: StringFieldUpdateOperationsInput | string
+    Institution?: StringFieldUpdateOperationsInput | string
+    Programs?: StringFieldUpdateOperationsInput | string
+    Facilitator?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    DateOfRegistration?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstitutionProfileCreateManyInput = {
+    id?: number
+    Name: string
+    Email: string
+    Institution: string
+    Programs: string
+    Facilitator: string
+    Username: string
+    Password: string
+    DateOfRegistration?: Date | string
+  }
+
+  export type InstitutionProfileUpdateManyMutationInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    Email?: StringFieldUpdateOperationsInput | string
+    Institution?: StringFieldUpdateOperationsInput | string
+    Programs?: StringFieldUpdateOperationsInput | string
+    Facilitator?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    DateOfRegistration?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InstitutionProfileUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    Email?: StringFieldUpdateOperationsInput | string
+    Institution?: StringFieldUpdateOperationsInput | string
+    Programs?: StringFieldUpdateOperationsInput | string
+    Facilitator?: StringFieldUpdateOperationsInput | string
+    Username?: StringFieldUpdateOperationsInput | string
+    Password?: StringFieldUpdateOperationsInput | string
+    DateOfRegistration?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -1996,32 +3178,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type UserProfileCountOrderByAggregateInput = {
     id?: SortOrder
     Name?: SortOrder
     Email?: SortOrder
     Program?: SortOrder
-    ImageUrl?: SortOrder
   }
 
   export type UserProfileAvgOrderByAggregateInput = {
@@ -2033,7 +3194,6 @@ export namespace Prisma {
     Name?: SortOrder
     Email?: SortOrder
     Program?: SortOrder
-    ImageUrl?: SortOrder
   }
 
   export type UserProfileMinOrderByAggregateInput = {
@@ -2041,7 +3201,6 @@ export namespace Prisma {
     Name?: SortOrder
     Email?: SortOrder
     Program?: SortOrder
-    ImageUrl?: SortOrder
   }
 
   export type UserProfileSumOrderByAggregateInput = {
@@ -2082,30 +3241,77 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type InstitutionProfileCountOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    Email?: SortOrder
+    Institution?: SortOrder
+    Programs?: SortOrder
+    Facilitator?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    DateOfRegistration?: SortOrder
+  }
+
+  export type InstitutionProfileAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type InstitutionProfileMaxOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    Email?: SortOrder
+    Institution?: SortOrder
+    Programs?: SortOrder
+    Facilitator?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    DateOfRegistration?: SortOrder
+  }
+
+  export type InstitutionProfileMinOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    Email?: SortOrder
+    Institution?: SortOrder
+    Programs?: SortOrder
+    Facilitator?: SortOrder
+    Username?: SortOrder
+    Password?: SortOrder
+    DateOfRegistration?: SortOrder
+  }
+
+  export type InstitutionProfileSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -2114,6 +3320,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2139,20 +3349,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2199,32 +3395,29 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 
@@ -2236,6 +3429,10 @@ export namespace Prisma {
      * @deprecated Use UserProfileDefaultArgs instead
      */
     export type UserProfileArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserProfileDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use InstitutionProfileDefaultArgs instead
+     */
+    export type InstitutionProfileArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = InstitutionProfileDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

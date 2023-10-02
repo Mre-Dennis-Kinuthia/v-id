@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.3.1
- * Query Engine version: 2804dc98259d2ea960602aca6b8e7fdc03c1758f
+ * Query Engine version: 61e140623197a131c2a6189271ffee05a7aa9a59
  */
 Prisma.prismaVersion = {
   client: "5.3.1",
-  engine: "2804dc98259d2ea960602aca6b8e7fdc03c1758f"
+  engine: "61e140623197a131c2a6189271ffee05a7aa9a59"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -111,8 +111,19 @@ exports.Prisma.UserProfileScalarFieldEnum = {
   id: 'id',
   Name: 'Name',
   Email: 'Email',
-  Program: 'Program',
-  ImageUrl: 'ImageUrl'
+  Program: 'Program'
+};
+
+exports.Prisma.InstitutionProfileScalarFieldEnum = {
+  id: 'id',
+  Name: 'Name',
+  Email: 'Email',
+  Institution: 'Institution',
+  Programs: 'Programs',
+  Facilitator: 'Facilitator',
+  Username: 'Username',
+  Password: 'Password',
+  DateOfRegistration: 'DateOfRegistration'
 };
 
 exports.Prisma.SortOrder = {
@@ -125,14 +136,10 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
-  UserProfile: 'UserProfile'
+  UserProfile: 'UserProfile',
+  InstitutionProfile: 'InstitutionProfile'
 };
 
 /**
