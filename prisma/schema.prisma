@@ -21,9 +21,8 @@ model UserProfile {
 
 model InstitutionProfile {
   id             Int       @id @default(autoincrement())
-  Name           String
-  Email          String    @unique
-  Institution    String
+  institutionName           String
+  institutionEmail          String    @unique
   Programs       String
   Facilitator    String
   Username       String

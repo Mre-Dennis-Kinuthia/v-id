@@ -53,7 +53,17 @@ app.post('/register', async (req, res) => {
       return res.status(400).send('Missing data.');
     }
 
-    // Your user registration logic here
+    const user = await prisma.institutionProfile.create({
+      data: {
+        name: institutionName,
+        email,
+institutionName,
+        programs,
+        facilitator,
+        username,
+        password,
+      },
+    });
 
     console.log('User registered successfully');
     return res.status(200).send('User registered successfully');
