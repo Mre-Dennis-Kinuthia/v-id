@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 
 // Serve the register.html page
 app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html'));
+  res.sendFile(path.join(__dirname, 'public', '/auth/institution/register.html'));
 });
 
 // Serve the login.html page
