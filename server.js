@@ -29,7 +29,7 @@ app.get('/register', (req, res) => {
 
 // Serve the login.html page
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
+  res.sendFile(path.join(__dirname, 'public', '/auth/learner/login.html'));
 });
 
 // Add body-parser middleware
