@@ -25,6 +25,10 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Corrected file path
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login.html')); // Corrected file path
+});
+
 // Handle file upload
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
