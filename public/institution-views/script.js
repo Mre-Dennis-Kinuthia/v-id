@@ -1,3 +1,17 @@
+const { getAllLearners } = require('./learnerService');
+
+btnView1.addEventListener('click', async () => {
+    hideAllViews();
+    view1.style.display = 'block';
+
+    try {
+        const learners = await getAllLearners();
+        generateLearnerCards(learners);
+    } catch (error) {
+        console.error('Error displaying learners:', error);
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     const btnView1 = document.getElementById('btnView1');
     const btnView2 = document.getElementById('btnView2');

@@ -1,0 +1,91 @@
+nav{
+position: absolute;
+top: 98%;
+}
+
+.main-id {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(to bottom, #f2f2f2, #e0e0e0);
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.main-id img {
+  width: 100%;
+  max-width: 150px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-id h1 {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.main-id .title {
+  color: #555;
+  font-size: 16px;
+  margin-top: -5px;
+}
+
+.main-id p {
+  font-size: 14px;
+}
+
+.main-id a {
+  text-decoration: none;
+  color: #333;
+  margin: 0 10px;
+  font-size: 24px;
+}
+
+.main-id button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.main-id button:hover {
+  background-color: #555;
+}
+
+/* Activity Bar Styles */
+.activity-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.activity-status {
+  flex-grow: 1;
+  text-align: center;
+  padding: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.active {
+  background-color: #4CAF50; /* Green for Active */
+  color: white;
+}
+
+.inactive {
+  background-color: #F44336; /* Red for Inactive */
+  color: white;
+}
+
+.deferred {
+  background-color: #FFC107; /* Yellow for Deferred */
+  color: white;
+}

@@ -1,24 +1,19 @@
-
-body {
-    font-family: Arial, sans-serif;
-}
-    
 nav {
     background-color: #333;
     color: #fff;
     padding: 10px;
 }
-    
+
 ul {
     list-style: none;
     padding: 0;
 }
-    
+
 li {
     display: inline;
     margin-right: 10px;
 }
-    
+
 .view {
     display: none; /* Hide all views by default */
     padding: 20px;
@@ -35,25 +30,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-/* Sidebar styles */
-.vertical-sidebar {
-    height: 100%;
-    width: 250px; /* Initial width of the sidebar */
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #333;
-    overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 60px;
-    color: #fff;
-}
-
-.collapsed {
-    width: 60px; /* Collapsed width of the sidebar */
-    overflow: hidden;
 }
 
 #toggleSidebar {
@@ -110,4 +86,21 @@ body {
 
 .expanded {
     width: calc(100% - 60px);
+}
+.vertical-sidebar {
+    height: 97%;
+    width: 250px; /* Initial width of the sidebar */
+    position: fixed;
+    top: 10px;
+    left: 40px;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    color: #fff;
+    border-radius: 10px;
+}
+.collapsed {
+    width: 60px; /* Collapsed width of the sidebar */
+    overflow: hidden;
 }

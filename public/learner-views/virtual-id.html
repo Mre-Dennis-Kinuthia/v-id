@@ -3,16 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>ID</title>
 </head>
 <body>
     <nav>
-
+        <ul>
+            <li><button id="btnView1">Dashboard</button></li>
+            <li><button id="btnView2">Notice Board</button></li>
+        </ul>
     </nav>
-    <div class="main-id">
+<div class="main-id">
+    <div>
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
+        <h1>John Doe</h1>
+        <p class="title">Student</p>
+        <p>Program: Computer Science</p> <!-- Add the program here -->
+        <p>Student ID: 12345</p> <!-- Add the student ID here -->
+        <p>Cohort: Fall 2022</p> <!-- Add the cohort here -->
+        <p>Class of Graduation: 2026</p> <!-- Add the class of graduation here -->
+
+            <!-- Activity Bar -->
+        <div class="activity-bar">
+            <div class="activity-status active">Active</div>
+            <div class="activity-status inactive">Inactive</div>
+            <div class="activity-status deferred">Deferred</div>
+        </div>
+
+        <div style="margin: 24px 0;">
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+        </div>
+        <p><button>Contact</button></p>
+    </div>
+</div>
 
     </div>
     <div class="broadcast">
+        <!-- Notice Board Section -->
+        <h2>Notice Board</h2>
+        <ul id="noticeList">
+            <li>Notice 1: Lorem ipsum dolor sit amet.</li>
+            <li>Notice 2: Consectetur adipiscing elit.</li>
+            <li>Notice 3: Sed do eiusmod tempor incididunt.</li>
+            <!-- Add your notices here -->
+        </ul>
     </div>
+    <script src="script.js"></script>
+    </body>
 </body>
 </html>
