@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Institution view</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Institution View</title>
 </head>
+
 <body>
-    <nav class="horizontal-bar">
-
-    </nav>
-
-    <section class="/">
-        <div class="filter-bar-container">
-
-        </div>
-        <div class="all-id-container">
-
-        <div>
-    </section>
-    <section class="learner-management">
-        <div>
-            <h1>Upload Excel File</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept=".xlsx">
-            <button type="submit">Upload</button>
-        </form>
-        </div>
-    </section>
-    <section class="notification-broadcast">
-
-    </section>
-    <section class="institution-profiles">
-
-    </section>
+    <header>
+        <nav class="vertical-sidebar">
+            <button id="toggleSidebar">☰</button>
+            <ul id="sidebarMenu">
+                <li><button id="btnView1">Dashboard</button></li>
+                <li><button id="btnView2">Upload Data</button></li>
+                <li><button id="btnView3">Notifications</button></li>
+                <li><button id="btnView4">Profiles</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="view1" class="dashboard">
+            <center><h1>dashboard</h1></center>
+        </section>
+        <section id="view2" class="upload-data">
+            <center><h1>Upload Excel File</h1></center>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".xlsx">
+                <button type="submit">Upload</button>
+            </form>
+        </section>
+        <section id="view3" class="notifications">
+            <center><h1>notifications</h1></center>
+        </section>
+        <section id="view4" class="user-profiles">
+            <center><h1>user profiles</h1></center>
+        </section>
+    </main>
+    <script src="script.js"></script>
 </body>
+
 </html>
