@@ -59,14 +59,25 @@ nav ul li a{
     box-sizing: border-box;
 }
 .prod-text{
-
+    width: 60%;
+    height: 20%;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 0 auto;
 }
 .prod-card{
     position: absolute;
-    top: 30%;
+    top: 55%;
     left: 20%;
     width: 60%;
-    height: 60%;
+    height: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
