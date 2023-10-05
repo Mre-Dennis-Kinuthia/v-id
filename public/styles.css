@@ -60,7 +60,7 @@ nav ul li a{
 }
 .prod-text{
     width: 60%;
-    height: 20%;
+    height: 30%;
     position: absolute;
     top: 25%;
     left: 20%;
@@ -85,4 +85,12 @@ nav ul li a{
     border: 1px solid black;
     border-radius: 10px;
     margin: 0 auto;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 50%;
 }
