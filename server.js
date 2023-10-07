@@ -47,9 +47,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { institutionName, institutionEmail, programs, facilitator, username, password, confirmPassword, agreeTerms } = req.body;
+    const { institutionName, institutionEmail, Programs, Facilitator, Username, Password, confirmPassword, agreeTerms } = req.body;
 
-    if (!institutionName || !institutionEmail || !programs || !facilitator || !username || !password || !confirmPassword || !agreeTerms) {
+    if (!institutionName || !institutionEmail || !Programs || !Facilitator || !Username || !Password || !confirmPassword || !agreeTerms) {
       return res.status(400).send('Missing data.');
     }
 
@@ -58,7 +58,7 @@ app.post('/register', async (req, res) => {
       return res.status(400).send('Passwords do not match.');
     }
 
-    // Check if the institution with the same username or email already exists
+    /*Check if the institution with the same username or email already exists
     const existingInstitution = await prisma.institutionProfile.findFirst({
       where: {
         OR: [
@@ -71,7 +71,7 @@ app.post('/register', async (req, res) => {
     if (existingInstitution) {
       return res.status(400).send('Institution with the same username or email already exists.');
     }
-
+'*/
     // Create a new institution profile in the database
     /**
      * Creates a new institution profile in the database.
@@ -89,10 +89,10 @@ app.post('/register', async (req, res) => {
       data: {
         institutionName: institutionName,
         institutionEmail: institutionEmail,
-        programs: programs.split(','), // Split programs into an array if they are comma-separated
-        facilitator: facilitator,
-        username: username,
-        password: password, // You should hash the password before storing it in production
+        Programs: programs.split(','), // Split programs into an array if they are comma-separated
+        Facilitator: facilitator,
+        Username: username,
+        Password: password, // You should hash the password before storing it in production
       },
     });
 
