@@ -5,7 +5,8 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
 const bodyParser = require('body-parser'); // Import body-parser
-
+const prettyjson = require('prettyjson');
+const session = require('expres s-session');
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -48,8 +49,10 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 app.post('/register', async (req, res) => {
   try {
     const { institutionName, institutionEmail, Programs, Facilitator, Username, Password, confirmPassword } = req.body;
+    console.log('Request Body:', req.body);
 
     if (!institutionName || !institutionEmail || !Programs || !Facilitator || !Username || !Password || !confirmPassword) {
+      console.log('Missing fields:', { institutionEmail, Programs, Facilitator, Username, Password }); // Debug statement
       return res.status(400).send('Missing data.');
     }
 
@@ -89,22 +92,32 @@ app.post('/register', async (req, res) => {
       data: {
         institutionName: institutionName,
         institutionEmail: institutionEmail,
-        Programs: programs.split(','), // Split programs into an array if they are comma-separated
-        Facilitator: facilitator,
-        Username: username,
-        Password: password, // You should hash the password before storing it in production
+        Programs: Programs.split(','), // Split programs into an array if they are comma-separated
+        Facilitator: Facilitator,
+        Username: Username,
+        Password: Password, // You should hash the password before storing it in production
       },
     });
 
-    console.log('User registered successfully');
-    return res.status(200).send('User registered successfully');
-  } catch (error) {
-    console.error('Error registering user:', error.message);
-    return res.status(500).send('An error occurred during user registration.');
-  }
-});
+    try {
+      const newUser = await prisma.institutionProfile.create({
+        data: {
+        institutionName: institutionName,
+        institutionEmail: institutionEmail,
+        Programs: Programs.split(','), // Split programs into an array if they are comma-separated
+        Facilitator: Facilitator,
+        Username: Username,
+        Password: Password,          
+        },
+      });
 
-
+      res.json({ message: 'User registered successfully', user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to register user', errorMessage: error.message });
+    }
+  });
+  
 app.post('/login', async (req, res) => {
   try {
     const { email } = req.body;
