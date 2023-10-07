@@ -47,9 +47,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { institutionName, institutionEmail, Programs, Facilitator, Username, Password, confirmPassword, agreeTerms } = req.body;
+    const { institutionName, institutionEmail, Programs, Facilitator, Username, Password, confirmPassword } = req.body;
 
-    if (!institutionName || !institutionEmail || !Programs || !Facilitator || !Username || !Password || !confirmPassword || !agreeTerms) {
+    if (!institutionName || !institutionEmail || !Programs || !Facilitator || !Username || !Password || !confirmPassword) {
       return res.status(400).send('Missing data.');
     }
 
