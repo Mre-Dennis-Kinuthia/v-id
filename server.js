@@ -16,7 +16,6 @@ const upload = multer({ storage: storage });
 
 // Serve static files from the "public" folder
 app.use(express.static('public'));
-
 // Serve the HTML form
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'landing.html'));
