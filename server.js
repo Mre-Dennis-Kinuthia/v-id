@@ -52,15 +52,46 @@ app.post('/register', async (req, res) => {
       return res.status(400).send('Missing data.');
     }
 
-    const user = await prisma.institutionProfile.create({
+    // Check if the password and confirmPassword match
+    if (password !== confirmPassword) {
+      return res.status(400).send('Passwords do not match.');
+    }
+
+    // Check if the institution with the same username or email already exists
+    const existingInstitution = await prisma.institutionProfile.findFirst({
+      where: {
+        OR: [
+          { username: username },
+          { email: email },
+        ],
+      },
+    });
+
+    if (existingInstitution) {
+      return res.status(400).send('Institution with the same username or email already exists.');
+    }
+
+    // Create a new institution profile in the database
+    /**
+     * Creates a new institution profile in the database.
+     * @async
+     * @function
+     * @param {string} institutionName - The name of the institution.
+     * @param {string} email - The email address of the institution.
+     * @param {string} programs - A comma-separated string of programs offered by the institution.
+     * @param {string} facilitator - The name of the facilitator for the institution.
+     * @param {string} username - The username for the institution's account.
+     * @param {string} password - The password for the institution's account (should be hashed before storing in production).
+     * @returns {Promise<Object>} The newly created institution profile.
+     */
+    const newUser = await prisma.institutionProfile.create({
       data: {
-        name: institutionName,
-        email,
-        institutionName,
-        programs,
-        facilitator,
-        username,
-        password,
+        institutionName: institutionName,
+        email: email,
+        programs: programs.split(','), // Split programs into an array if they are comma-separated
+        facilitator: facilitator,
+        username: username,
+        password: password, // You should hash the password before storing it in production
       },
     });
 
@@ -71,6 +102,7 @@ app.post('/register', async (req, res) => {
     return res.status(500).send('An error occurred during user registration.');
   }
 });
+
 
 app.post('/login', async (req, res) => {
   try {
