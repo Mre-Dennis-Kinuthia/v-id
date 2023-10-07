@@ -61,63 +61,31 @@ app.post('/register', async (req, res) => {
       return res.status(400).send('Passwords do not match.');
     }
 
-    /*Check if the institution with the same username or email already exists
-    const existingInstitution = await prisma.institutionProfile.findFirst({
-      where: {
-        OR: [
-          { username: username },
-          { institutionEmail: institutionEmail },
-        ],
-      },
-    });
-
-    if (existingInstitution) {
-      return res.status(400).send('Institution with the same username or email already exists.');
-    }
-'*/
     // Create a new institution profile in the database
-    /**
-     * Creates a new institution profile in the database.
-     * @async
-     * @function
-     * @param {string} institutionName - The name of the institution.
-     * @param {string} email - The email address of the institution.
-     * @param {string} programs - A comma-separated string of programs offered by the institution.
-     * @param {string} facilitator - The name of the facilitator for the institution.
-     * @param {string} username - The username for the institution's account.
-     * @param {string} password - The password for the institution's account (should be hashed before storing in production).
-     * @returns {Promise<Object>} The newly created institution profile.
-     */
-    const newUser = await prisma.institutionProfile.create({
-      data: {
-        institutionName: institutionName,
-        institutionEmail: institutionEmail,
-        Programs: Programs.split(','), // Split programs into an array if they are comma-separated
-        Facilitator: Facilitator,
-        Username: Username,
-        Password: Password, // You should hash the password before storing it in production
-      },
-    });
-
     try {
       const newUser = await prisma.institutionProfile.create({
         data: {
-        institutionName: institutionName,
-        institutionEmail: institutionEmail,
-        Programs: Programs.split(','), // Split programs into an array if they are comma-separated
-        Facilitator: Facilitator,
-        Username: Username,
-        Password: Password,          
+          institutionName: institutionName,
+          institutionEmail: institutionEmail,
+          Programs: Programs.split(','), // Split programs into an array if they are comma-separated
+          Facilitator: Facilitator,
+          Username: Username,
+          Password: Password, // You should hash the password before storing it in production
         },
       });
 
-      res.json({ message: 'User registered successfully', user });
+      res.json({ message: 'User registered successfully', user: newUser });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Failed to register user', errorMessage: error.message });
     }
-  });
-  
+  } catch (error) {
+    console.error('Error registering user:', error.message);
+    return res.status(500).send('An error occurred during user registration.');
+  }
+});
+
+
 app.post('/login', async (req, res) => {
   try {
     const { email } = req.body;
