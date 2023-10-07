@@ -54,7 +54,7 @@ app.post('/register', async (req, res) => {
     }
 
     // Check if the password and confirmPassword match
-    if (password !== confirmPassword) {
+    if (Password !== confirmPassword) {
       return res.status(400).send('Passwords do not match.');
     }
 
