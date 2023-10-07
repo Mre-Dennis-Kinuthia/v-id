@@ -5,8 +5,7 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
 const bodyParser = require('body-parser'); // Import body-parser
-const prettyjson = require('prettyjson');
-const session = require('expres s-session');
+
 const app = express();
 const port = process.env.PORT || 3001;
 
