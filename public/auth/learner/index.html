@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Verify</title>
+    <title>Login</title>
 </head>
 <body>
-    <form>
-        <input type="text" placeholder="email@example.com" required>
-        <input type="submit" value ="Verify">
+    <div class="content-view">
+    <h1>Login</h1>
+    
+    <button id="learnerButton">Login as Learner</button>
+    <button id="institutionButton">Login as Institution</button>
+
+    <form id="learnerForm" style="display: none;">
+        <input type="text" placeholder="Learner Email" required>
+        <input type="password" placeholder="Password" required>
+        <input type="submit" value="Login as Learner">
     </form>
+
+    <form id="institutionForm" style="display: none;">
+        <input type="text" placeholder="Institution Email" required>
+        <input type="submit" value="Login as Institution">
+    </form>
+</div>
+    <script>
+        const learnerButton = document.getElementById("learnerButton");
+        const institutionButton = document.getElementById("institutionButton");
+        const learnerForm = document.getElementById("learnerForm");
+        const institutionForm = document.getElementById("institutionForm");
+
+        learnerButton.addEventListener('click', function () {
+            learnerForm.style.display = "block";
+            institutionForm.style.display = "none";
+        });
+
+        institutionButton.addEventListener('click', function () {
+            institutionForm.style.display = "block";
+            learnerForm.style.display = "none";
+        });
+    </script>
 </body>
 </html>

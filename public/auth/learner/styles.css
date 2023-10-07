@@ -14,5 +14,13 @@ input[type="submit"]{
     height: 40px;
     width: 100px;
     margin-top: 50px;
-
+}
+.content-view{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60%;
+    height: 100%;
+    background-color: blue;
+    color: #fff;
 }
