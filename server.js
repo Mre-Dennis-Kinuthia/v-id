@@ -1,5 +1,6 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
@@ -8,7 +9,7 @@ const bodyParser = require('body-parser'); // Import body-parser
 const app = express();
 const port = process.env.PORT || 3001;
 
-const prisma = new PrismaClient();
+
 
 // Define storage for the uploaded Excel file
 const storage = multer.memoryStorage();
@@ -46,9 +47,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
 app.post('/register', async (req, res) => {
   try {
-    const { institutionName, email, programs, facilitator, username, password, confirmPassword, agreeTerms } = req.body;
+    const { institutionName, institutionEmail, programs, facilitator, username, password, confirmPassword, agreeTerms } = req.body;
 
-    if (!institutionName || !email || !programs || !facilitator || !username || !password || !confirmPassword || !agreeTerms) {
+    if (!institutionName || !institutionEmail || !programs || !facilitator || !username || !password || !confirmPassword || !agreeTerms) {
       return res.status(400).send('Missing data.');
     }
 
@@ -62,7 +63,7 @@ app.post('/register', async (req, res) => {
       where: {
         OR: [
           { username: username },
-          { email: email },
+          { institutionEmail: institutionEmail },
         ],
       },
     });
@@ -87,7 +88,7 @@ app.post('/register', async (req, res) => {
     const newUser = await prisma.institutionProfile.create({
       data: {
         institutionName: institutionName,
-        email: email,
+        institutionEmail: institutionEmail,
         programs: programs.split(','), // Split programs into an array if they are comma-separated
         facilitator: facilitator,
         username: username,
