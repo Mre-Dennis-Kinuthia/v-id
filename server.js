@@ -1,6 +1,12 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: 'DATABASE_URL',
+    },
+  },
+});
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
