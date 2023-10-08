@@ -65,7 +65,7 @@ app.get('/learners', async (req, res) => {
     res.render('learners', { learners });
   } catch (error) {
     console.error('Error fetching learners:', error.message);
-    res.status(500).send('An error occurred while fetching learners.');
+    res.status(500).send('An error occurred while fetching learners.' + error.message);
   }
 });
 
