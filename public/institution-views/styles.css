@@ -152,6 +152,7 @@ body {
     position: absolute;
     left: 40%;
     width: 90%;
+    top: 20%;
 }
 
 input[type="text"] {
