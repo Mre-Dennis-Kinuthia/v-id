@@ -62,21 +62,31 @@ app.get('/login/institution', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/login.html'));
 });
 
-// Handle GET request to display learners
-app.get('/learners', async (req, res) => {
+// Server-side code
+app.get('/search', async (req, res) => {
   try {
-    const learners = await prisma.learnerProfile.findMany();
-    if (learners.length > 0) {
-      // Respond with JSON data or render a view as needed
-      res.json(learners);
+    const name = req.query.name; // Get the name from the query parameter
+
+    // Query the database for a learner with the provided name
+    const learner = await prisma.userProfile.findUnique({
+      where: {
+        Name: name,
+      },
+    });
+
+    if (learner) {
+      // Send the learner's profile as JSON response
+      res.json(learner);
     } else {
-      res.status(404).json({ message: 'No learners found' });
+      // Send a 404 response if no learner is found
+      res.status(404).send('No learner found with that name.');
     }
   } catch (error) {
-    console.error('Error fetching learners:', error.message);
-    res.status(500).json({ error: 'An error occurred while fetching learners' });
+    console.error('Error searching for learner:', error.message);
+    res.status(500).send('An error occurred while searching for a learner.');
   }
 });
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
