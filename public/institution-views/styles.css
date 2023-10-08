@@ -112,6 +112,9 @@ body {
     left: 25%;
     width: 75%;
     height: 650px;
+    display: flex;
+    flex-direction: column; /* Arrange cards in a column */
+    align-items: center; /* Center items horizontally */
 }
 
 .card {
