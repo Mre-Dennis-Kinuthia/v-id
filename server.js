@@ -87,15 +87,15 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 
     await prisma.$transaction(async (prisma) => {
       for (let i = 0; i < rows.length; i++) {
-        const { Name, Email, Program } = rows[i];
+        const { Name, learnerEmail, Program } = rows[i];
 
-        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program},`);
+        console.log(`Row ${i + 2} - Name: ${Name}, learnerEmail: ${learnerEmail}, Program: ${Program},`);
 
-        if (Name && Email && Program) {
+        if (Name && learnerEmail && Program) {
           await prisma.userProfile.create({
             data: {
               Name,
-              Email,
+              learnerEmail,
               Program,
             },
           });
@@ -155,7 +155,6 @@ app.post('/register', async (req, res) => {
     return res.status(500).send('An error occurred during user registration.');
   }
 });
-
 
 // Handle Learner login
 app.post('/login/learner', async (req, res) => {

@@ -13,21 +13,21 @@ datasource db {
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 model UserProfile {
-  id        Int       @id @default(autoincrement())
-  Name      String
-  learnerEmail     String    @unique
-  Program   String
-  learnerPassword String
+  id                Int       @id @default(autoincrement())
+  Name              String
+  learnerEmail      String    @unique
+  Program           String
+  learnerPassword   String
 }
 // prisma/schema.prisma
 
 model InstitutionProfile {
-  id             Int       @id @default(autoincrement())
-  institutionName           String
-  institutionEmail          String    @unique
-  Programs       String[] //define programs as an array of sring
-  Facilitator    String
-  Username       String
-  Password       String
-  DateOfRegistration DateTime @default(now())
+  id                    Int       @id @default(autoincrement())
+  institutionName       String
+  institutionEmail      String    @unique
+  Programs              String[] //define programs as an array of sring
+  Facilitator           String
+  Username              String
+  Password              String
+  DateOfRegistration    DateTime @default(now())
 }
