@@ -106,7 +106,12 @@ body {
 }
 
 /* Add this CSS code to your styles.css file */
-
+.filter-bar{
+    position: absolute;
+    left: 25%;
+    height: 150px;
+    width: 35%;
+}
 .dashboard-cards{
     position: absolute;
     left: 25%;
