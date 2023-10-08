@@ -1,6 +1,6 @@
-const express = require('express');
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from './prisma/prisma/generated/client/edge'
 const prisma = new PrismaClient();
+const express = require('express'); 
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
