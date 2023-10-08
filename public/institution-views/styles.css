@@ -108,9 +108,9 @@ body {
 /* Add this CSS code to your styles.css file */
 input[type="text"]{
     position: absolute;
-    left: 50%;
-    height: 150px;
-    width: 35%;
+    left: 45%;
+    height: 200px;
+    width: 40%;
 }
 .dashboard-cards{
     position: absolute;
