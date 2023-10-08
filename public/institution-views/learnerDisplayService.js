@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const learnerDisplayContainer = document.getElementById('learnerDisplayContainer');
+    const errorMessageContainer = document.getElementById('errorMessageContainer');
 
     searchButton.addEventListener('click', async () => {
         try {
@@ -18,6 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (contentType && contentType.includes('application/json')) {
                     // Parse the response as JSON
                     const learner = await response.json();
+
+                    // Clear any previous error message
+                    errorMessageContainer.textContent = '';
 
                     // Clear the learner display container
                     learnerDisplayContainer.innerHTML = '';
@@ -37,15 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         learnerDisplayContainer.innerHTML = '<p>No learner found with that name.</p>';
                     }
                 } else {
-                    console.error('Response is not JSON:', contentType);
                     // Handle the case where the response is not JSON
-                    // You can display an error message or handle it as needed.
+                    errorMessageContainer.textContent = 'Error: Unexpected response format.';
                 }
             } else {
                 console.error('Failed to fetch learner data:', response.statusText);
             }
         } catch (error) {
             console.error('Error fetching and displaying learners:', error);
+            errorMessageContainer.textContent = 'An error occurred while fetching data.';
         }
     });
 });
