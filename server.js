@@ -65,15 +65,19 @@ app.get('/login/institution', (req, res) => {
 // Handle GET request to display learners
 app.get('/learners', async (req, res) => {
   try {
-    // Call the getAllLearners function from learnerDisplayService
     const learners = await prisma.learnerProfile.findMany();
-    // Render the "learners" view and pass the learners data
-    res.render('learners', { learners });
+    if (learners.length > 0) {
+      // Respond with JSON data or render a view as needed
+      res.json(learners);
+    } else {
+      res.status(404).json({ message: 'No learners found' });
+    }
   } catch (error) {
     console.error('Error fetching learners:', error.message);
-    res.status(500).send('An error occurred while fetching learners.' + error.message);
+    res.status(500).json({ error: 'An error occurred while fetching learners' });
   }
 });
+
 
 // Serve CSS files with the correct MIME type
 app.get('/login/styles.css', (req, res) => {
