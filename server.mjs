@@ -1,4 +1,4 @@
-import { PrismaClient } from './prisma/prisma/generated/client/edge'
+import { PrismaClient } from '../prisma/prisma/generated/client/edge.js';
 const prisma = new PrismaClient();
 const express = require('express'); 
 const multer = require('multer');
