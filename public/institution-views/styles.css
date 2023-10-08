@@ -107,6 +107,12 @@ body {
 
 /* Add this CSS code to your styles.css file */
 
+.dashboard-cards{
+    position: absolute;
+    left: 25%;
+}
+
+
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
