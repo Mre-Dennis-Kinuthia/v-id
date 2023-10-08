@@ -54,6 +54,17 @@ app.get('/login/institution', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/login.html'));
 });
 
+
+// Serve CSS files with the correct MIME type
+app.get('/login/styles.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', '/auth/institution/styles.css'), {
+    headers: {
+      'Content-Type': 'text/css', // Set the correct MIME type for CSS
+    },
+  });
+});
+
+
 // Add body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
