@@ -154,6 +154,8 @@ input[type="text"]{
 
 .filter-bar {
     margin: 20px 0;
+    position: absolute;
+    top: 10%;
 }
 
 input[type="text"] {
