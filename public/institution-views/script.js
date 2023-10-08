@@ -11,8 +11,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const content = document.querySelector('.content');
     const learnerContainer = document.getElementById('learnerContainer');
 
+    const toggleSidebarBtn = document.getElementById('toggleSidebar');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const nav = document.querySelector('.vertical-sidebar');
 
-    // Function to create a learner card
+    toggleSidebarBtn.addEventListener('click', () => {
+        nav.classList.toggle('collapsed');
+    });
+
+    // By default, you might want the sidebar to be collapsed on page load
+    nav.classList.add('collapsed');
+
+
+    /* // Function to create a learner card
     function createLearnerCard(learner) {
         const card = document.createElement('div');
         card.classList.add('learner-card');
@@ -30,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return card;
     }
 
-    // Function to fetch learner data and display cards
+Function to fetch learner data and display cards
     async function displayLearners() {
         try {
             const response = await fetch('/api/learners'); // Replace with your API endpoint
@@ -48,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error fetching and displaying learners:', error);
         }
     }
-
+*/
     btnView1.addEventListener('click', () => {
         hideAllViews();
         view1.style.display = 'block';

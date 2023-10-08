@@ -49,6 +49,17 @@ body {
     color: #f1f1f1;
 }
 
+#sidebarMenu .text,
+#sidebarMenu .icon {
+    display: inline-block;
+    transition: opacity 0.3s;
+}
+
+#sidebarMenu .icon {
+    opacity: 0;
+    margin-left: 10px;
+}
+
 #sidebarMenu {
     list-style: none;
     padding: 0;
@@ -67,10 +78,21 @@ body {
     border: none;
     color: #fff;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #sidebarMenu button:hover {
     background-color: #444;
+}
+
+.collapsed #sidebarMenu .text {
+    opacity: 0;
+}
+
+.collapsed #sidebarMenu .icon {
+    opacity: 1;
 }
 
 /* Content styles */
