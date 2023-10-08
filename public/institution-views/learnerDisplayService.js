@@ -20,9 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const contentType = response.headers.get('content-type');
                 if (contentType && contentType.includes('application/json')) {
 
-                    // Parse the response as JSON
-                    const learner = await response.json();
-
                     // Clear any previous error message
                     errorMessageContainer.textContent = '';
 
