@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="learner.css">
+    <title>Login</title>
 </head>
+
 <body>
-    <h1>login</h1>
-    <form action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
+    <h1>Login</h1>
+    <div class="content-view">
+        <button id="learnerButton">Login as Learner</button>
+        <button id="institutionButton">Login as Institution</button>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <form id="institutionForm" action="/login/institution" style="display: none;">
+            <input type="institutionEmail" name="institutionEmail" placeholder="Institution Email" required>
+            <input type="password" name="Password" placeholder="Password" required><br>
+            <input type="submit" value="Login as Institution">
+        </form>
+    </div>
+    <script>/*
+        const learnerButton = document.getElementById("learnerButton");
+        const institutionButton = document.getElementById("institutionButton");
+        const institutionForm = document.getElementById("institutionForm");
 
-        <button type="submit">Submit</button>
-    </form>
+        learnerButton.addEventListener('click', function () {
+            institutionForm.style.display = "none";
+        });
+
+        institutionButton.addEventListener('click', function () {
+            institutionForm.style.display = "block";
+        });*/
+    </script>
 </body>
+
 </html>
