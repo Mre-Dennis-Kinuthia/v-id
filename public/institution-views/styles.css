@@ -118,7 +118,7 @@ body {
 }
 
 .card {
-    flex: 1; /* Make each card equally share the available space */
+    /*flex: 1;  Make each card equally share the available space */
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
