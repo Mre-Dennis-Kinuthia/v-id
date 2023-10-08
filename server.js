@@ -1,6 +1,6 @@
-import { PrismaClient } from '../prisma/prisma/generated/client/edge.js';
+const express = require('express');
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const express = require('express'); 
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
@@ -24,14 +24,7 @@ app.get('/', (req, res) => {
 
 // Serve the register.html page
 app.get('/register', (req, res) => {
-  const filePath = path.join(__dirname, 'public', '/auth/institution/register.html');
-  res.sendFile(filePath, (error) => {
-    if (error) {
-      console.error('Error sending file:', error);
-      res.status(500).send('An error occurred on the server.');
-    }
-  });
-  //(path.join(__dirname, 'public', '/auth/institution/register.html'));
+  res.sendFile(path.join(__dirname, 'public', '/auth/institution/register.html'));
 });
 
 // Serve the login.html page
@@ -53,8 +46,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-  console.log('Prisma instance:', prisma);
-
   try {
     const { institutionName, institutionEmail, Programs, Facilitator, Username, Password, confirmPassword } = req.body;
     console.log('Request Body:', req.body);
