@@ -164,15 +164,17 @@ input[type="text"] {
     border-radius: 5px;
 }
 
-button {
+.btn {
     background-color: #007BFF;
     color: #fff;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
     cursor: pointer;
+    position: absolute;
+    left: 47%;
 }
 
-button:hover {
+.btn:hover {
     background-color: #0056b3;
 }
