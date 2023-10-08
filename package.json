@@ -12,6 +12,7 @@
   },
   "author": "Dennis Ndun'gu",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^5.3.1",
     "aws-sdk": "^2.1454.0",
