@@ -62,22 +62,19 @@ app.get('/search', async (req, res) => {
     const name = req.query.name; // Get the name from the query parameter
 
     // Query the database for a learner with the provided name
-    const learner = await prisma.userProfile.findUnique({
+    const learner = await prisma.userProfile.findMany({
       where: {
-        Name: name,
+        Name: {
+          contains: name,
       },
+    },
     });
 
-    if (learner) {
-      // Send the learner's profile as JSON response
-      res.json(learner);
-    } else {
-      // Send a 404 response if no learner is found
-      res.status(404).send('No learner found with that name.');
-    }
+    // Render a view or send JSON response with the learners
+    res.render('learners', { learners });
   } catch (error) {
-    console.error('Error searching for learner:', error.message);
-    res.status(500).send('An error occurred while searching for a learner.');
+    console.error('Error searching for learners:', error.message);
+    res.status(500).send('An error occurred while searching for learners.');
   }
 });
 
