@@ -58,11 +58,12 @@ app.get('/login/institution', (req, res) => {
 
 // Server-side code
 app.get('/search', async (req, res) => {
+  let learners = []; // Define learners as an empty array
   try {
     const name = req.query.name; // Get the name from the query parameter
 
     // Query the database for a learner with the provided name
-    const learner = await prisma.userProfile.findMany({
+    learner = await prisma.userProfile.findMany({
       where: {
         Name: {
           contains: name,
