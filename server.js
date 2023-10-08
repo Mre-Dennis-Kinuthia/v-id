@@ -5,15 +5,34 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
 const bodyParser = require('body-parser'); // Import body-parser
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
+
+const crypto = require('crypto');
+
+// Generate a 256-bit (32-byte) random secret key
+const secretKey = crypto.randomBytes(32).toString('hex');
+
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-
-
 // Define storage for the uploaded Excel file
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
+
+app.use(
+  session({
+    secret: secretKey, // Store the secret key as an environment variable
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: true, // Set to true in a production environment with HTTPS
+    },
+  })
+);
+
 
 // Serve static files from the "public" folder
 app.use(express.static('public'));
@@ -93,10 +112,29 @@ app.post('/login', async (req, res) => {
       return res.status(400).send('Missing data.');
     }
 
-    // Your user login logic here
+    // Check if the user exists in the database
+    const user = await prisma.institutionProfile.findUnique({
+      where: {
+        institutionEmail: email,
+      },
+    });
 
-    console.log('User logged in successfully');
-    return res.status(200).send('User logged in successfully');
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+
+    // Verify the password (you should use a secure password hashing library like bcrypt)
+    const isPasswordValid = await verifyPassword(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).send('Incorrect password.');
+    }
+
+    // Authentication successful, create a user session
+    req.session.user = user; // Store user data in the session
+
+    // Redirect to the institution dashboard
+    res.redirect('/institution/dashboard'); // Replace with your actual dashboard URL
   } catch (error) {
     console.error('Error logging in user:', error.message);
     return res.status(500).send('An error occurred during user login.');
