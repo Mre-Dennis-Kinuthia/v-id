@@ -111,7 +111,7 @@ body {
     position: absolute;
     left: 25%;
     width: 75%;
-    height: 650px;
+    height: 150px;
     display: flex;
     flex-wrap: wrap; /* Allow cards to wrap to the next row */
     justify-content: space-between; /* Distribute cards evenly along the row */
