@@ -25,11 +25,6 @@ li {
     border: 1px solid #ccc;
 }
 /* Resetting some styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 /* Add this CSS */
 #view2, #view3, #view4 {
     display: none;
@@ -115,7 +110,7 @@ li {
 .vertical-sidebar {
     height: 80%;
     width: 250px; /* Initial width of the sidebar */
-    position: fixed;
+    position: absolute;
     top: 10px;
     left: 40px;
     background-color: #333;
