@@ -10,7 +10,6 @@ const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 
-
 // Generate a 256-bit (32-byte) random secret key
 const secretKey = crypto.randomBytes(32).toString('hex');
 
@@ -54,7 +53,6 @@ app.get('/login/institution', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/login.html'));
 });
 
-
 // Serve CSS files with the correct MIME type
 app.get('/login/styles.css', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/styles.css'), {
@@ -63,7 +61,6 @@ app.get('/login/styles.css', (req, res) => {
     },
   });
 });
-
 
 // Add body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
