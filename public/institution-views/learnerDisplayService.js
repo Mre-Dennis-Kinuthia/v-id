@@ -1,32 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Find the button element
-    const displayAllLearnersButton = document.getElementById('displayAllLearners');
-    // Find the container where learner data will be displayed
-    const learnerDisplayContainer = document.querySelector('.learner-display-card');
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const learnerDisplayContainer = document.getElementById('learnerDisplayContainer');
 
-    // Add a click event listener to the button
-    displayAllLearnersButton.addEventListener('click', async () => {
+    searchButton.addEventListener('click', async () => {
         try {
-            // Make an AJAX request to fetch learner data
-            const response = await fetch('/learners');
+            const searchTerm = searchInput.value.trim(); // Get the search term from the input field
+            if (searchTerm === '') {
+                return; // Do nothing if the search term is empty
+            }
+
+            // Make a request to fetch learners based on the search term
+            const response = await fetch(`/learners?searchTerm=${searchTerm}`);
             if (response.ok) {
-                // Parse the response as JSON
                 const learners = await response.json();
 
-                // Clear the container
+                // Clear the learner display container
                 learnerDisplayContainer.innerHTML = '';
 
-                // Display the learner data in the container (modify as needed)
-                learners.forEach((learner) => {
-                    const learnerCard = document.createElement('div');
-                    learnerCard.classList.add('learner-card');
-                    learnerCard.innerHTML = `
-                        <h2>${learner.Name}</h2>
-                        <p>Email: ${learner.learnerEmail}</p>
-                        <p>Program: ${learner.Program}</p>
-                    `;
-                    learnerDisplayContainer.appendChild(learnerCard);
-                });
+                if (learners.length > 0) {
+                    // Display each learner's information
+                    learners.forEach((learner) => {
+                        const learnerCard = document.createElement('div');
+                        learnerCard.classList.add('learner-card');
+                        learnerCard.innerHTML = `
+                            <h2>${learner.Name}</h2>
+                            <p>Email: ${learner.learnerEmail}</p>
+                            <p>Program: ${learner.Program}</p>
+                        `;
+                        learnerDisplayContainer.appendChild(learnerCard);
+                    });
+                } else {
+                    // Display a message when no learners are found
+                    learnerDisplayContainer.innerHTML = '<p>No learners found.</p>';
+                }
             } else {
                 console.error('Failed to fetch learner data:', response.statusText);
             }

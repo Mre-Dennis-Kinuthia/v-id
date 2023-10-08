@@ -78,6 +78,7 @@ app.get('/learners', async (req, res) => {
   }
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve CSS files with the correct MIME type
 app.get('/login/styles.css', (req, res) => {
