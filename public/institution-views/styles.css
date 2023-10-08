@@ -106,9 +106,9 @@ body {
 }
 
 /* Add this CSS code to your styles.css file */
-.filter-bar{
+input[type="text"]{
     position: absolute;
-    left: 25%;
+    left: 50%;
     height: 150px;
     width: 35%;
 }
