@@ -32,6 +32,11 @@ body {
     padding: 0;
 }
 
+/* Add this CSS */
+#view2, #view3, #view4 {
+    display: none;
+}
+
 #toggleSidebar {
     position: absolute;
     top: 0;
