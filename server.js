@@ -16,6 +16,9 @@ const secretKey = crypto.randomBytes(32).toString('hex');
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.set('view engine', 'ejs'); // Set EJS as the view engine
+app.set('views', path.join(__dirname, 'views')); // Set the views directory
+
 // Define storage for the uploaded Excel file
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -51,6 +54,19 @@ app.get('/login/learner', (req, res) => {
 
 app.get('/login/institution', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/login.html'));
+});
+
+// Handle GET request to display learners
+app.get('/learners', async (req, res) => {
+  try {
+    // Call the getAllLearners function from learnerDisplayService
+    const learners = await prisma.learnerProfile.findMany();
+    // Render the "learners" view and pass the learners data
+    res.render('learners', { learners });
+  } catch (error) {
+    console.error('Error fetching learners:', error.message);
+    res.status(500).send('An error occurred while fetching learners.');
+  }
 });
 
 // Serve CSS files with the correct MIME type
