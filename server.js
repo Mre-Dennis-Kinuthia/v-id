@@ -182,7 +182,7 @@ app.post('/login/institution', async (req, res) => {
     req.session.user = user; // Store user data in the session
 
     // Redirect to the institution dashboard
-    res.redirect('public/institution-views/dashboard.html'); // Replace with your actual dashboard URL
+    res.redirect('/institution-views/dashboard.html'); // Replace with your actual dashboard URL
   } catch (error) {
     console.error('Error logging in user:', error.message);
     return res.status(500).send('An error occurred during user login.');
