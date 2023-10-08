@@ -113,8 +113,8 @@ body {
     width: 75%;
     height: 650px;
     display: flex;
-    flex-direction: column; /* Arrange cards in a column */
-    align-items: center; /* Center items horizontally */
+    flex-wrap: wrap; /* Allow cards to wrap to the next row */
+    justify-content: space-between; /* Distribute cards evenly along the row */
 }
 
 .card {
