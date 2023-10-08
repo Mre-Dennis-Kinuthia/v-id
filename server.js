@@ -71,7 +71,42 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Handle file upload
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    // Your file upload handling code here
+    if (!req.file || !req.file.buffer) {
+      return res.status(400).send('No file uploaded.');
+    }
+
+    const buffer = req.file.buffer;
+    const workbook = xlsx.read(buffer, { type: 'buffer' });
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+    if (!worksheet) {
+      return res.status(400).send('No worksheet found in the Excel file.');
+    }
+
+    const rows = xlsx.utils.sheet_to_json(worksheet);
+
+    await prisma.$transaction(async (prisma) => {
+      for (let i = 0; i < rows.length; i++) {
+        const { Name, Email, Program } = rows[i];
+
+        console.log(`Row ${i + 2} - Name: ${Name}, Email: ${Email}, Program: ${Program},`);
+
+        if (Name && Email && Program) {
+          await prisma.userProfile.create({
+            data: {
+              Name,
+              Email,
+              Program,
+            },
+          });
+        } else {
+          console.log(`Skipping row ${i + 2} due to missing data.`);
+        }
+      }
+    });
+
+    console.log('Data imported successfully');
+    return res.status(200).send('File uploaded and data imported successfully.');
   } catch (error) {
     console.error('Error uploading and importing data:', error.message);
     return res.status(500).send('An error occurred during upload and data import.');
