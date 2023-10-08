@@ -172,7 +172,7 @@ app.post('/login/institution', async (req, res) => {
     }
 
     // Verify the password (you should use a secure password hashing library like bcrypt)
-    const isPasswordValid = await verifyPassword(Password, user.Password);
+    const isPasswordValid = await bcrypt.com(Password, user.Password);
 
     if (!isPasswordValid) {
       return res.status(401).send('Incorrect password.');
