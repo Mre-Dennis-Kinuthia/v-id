@@ -15,8 +15,9 @@ datasource db {
 model UserProfile {
   id        Int       @id @default(autoincrement())
   Name      String
-  Email     String    @unique
+  learnerEmail     String    @unique
   Program   String
+  learnerPassword String
 }
 // prisma/schema.prisma
 

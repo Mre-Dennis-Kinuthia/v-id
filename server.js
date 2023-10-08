@@ -7,13 +7,10 @@ const path = require('path');
 const bodyParser = require('body-parser'); // Import body-parser
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
-
 const crypto = require('crypto');
 
 // Generate a 256-bit (32-byte) random secret key
 const secretKey = crypto.randomBytes(32).toString('hex');
-
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -33,9 +30,9 @@ app.use(
   })
 );
 
-
 // Serve static files from the "public" folder
 app.use(express.static('public'));
+
 // Serve the HTML form
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'landing.html'));
@@ -104,18 +101,51 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.post('/login', async (req, res) => {
+// Handle Learner login
+app.post('/login/learner', async (req, res) => {
   try {
-    const { email } = req.body;
+    const { learnerEmail, learnerPassword } = req.body;
 
-    if (!email) {
+    // Check if the learnerEmail and learnerPassword are provided
+    if (!learnerEmail || !learnerPassword) {
+      return res.status(400).send('Email and password are required.');
+    }
+
+    // Search for a learner in your database by email
+    const learner = await prisma.learnerProfile.findUnique({
+      where: {
+        learnerEmail: learnerEmail,
+      },
+    });
+    // If the learner doesn't exist, or the password is incorrect, return an error
+    if (!learner || !comparePasswords(learnerPassword, learner.password)) {
+      return res.status(401).send('Incorrect learner credentials.');
+    }
+
+    // If credentials are valid, you can create a session for the learner
+    req.session.user = learner; // Store user data in the session
+
+    // Redirect to the learner dashboard or send a success response
+    res.redirect('/learner/dashboard'); // Replace with your actual dashboard URL
+  } catch (error) {
+    console.error('Error logging in learner:', error.message);
+    return res.status(500).send('An error occurred during learner login.');
+  }
+});
+
+// handle login institution
+app.post('/login/institution', async (req, res) => {
+  try {
+    const { institutionEmail } = req.body;
+
+    if (!institutionEmail) {
       return res.status(400).send('Missing data.');
     }
 
     // Check if the user exists in the database
     const user = await prisma.institutionProfile.findUnique({
       where: {
-        institutionEmail: email,
+        institutionEmail: institutionEmail,
       },
     });
 
