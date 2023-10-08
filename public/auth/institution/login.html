@@ -11,25 +11,11 @@
 <body>
     <h1>Login</h1>
     <div class="content-view">
-        <form id="institutionForm" action="/login/institution" style="display: none;">
+        <form id="institutionForm" action="/login/institution">
             <input type="institutionEmail" name="institutionEmail" placeholder="Institution Email" required>
             <input type="password" name="Password" placeholder="Password" required><br>
             <input type="submit" value="Login as Institution">
         </form>
     </div>
-    <script>/*
-        const learnerButton = document.getElementById("learnerButton");
-        const institutionButton = document.getElementById("institutionButton");
-        const institutionForm = document.getElementById("institutionForm");
-
-        learnerButton.addEventListener('click', function () {
-            institutionForm.style.display = "none";
-        });
-
-        institutionButton.addEventListener('click', function () {
-            institutionForm.style.display = "block";
-        });*/
-    </script>
 </body>
-
 </html>
