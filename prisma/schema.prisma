@@ -24,7 +24,7 @@ model InstitutionProfile {
   id             Int       @id @default(autoincrement())
   institutionName           String
   institutionEmail          String    @unique
-  Programs       String
+  Programs       String[] //define programs as an array of sring
   Facilitator    String
   Username       String
   Password       String
