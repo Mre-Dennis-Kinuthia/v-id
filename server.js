@@ -8,6 +8,8 @@ const bodyParser = require('body-parser'); // Import body-parser
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+
 
 // Generate a 256-bit (32-byte) random secret key
 const secretKey = crypto.randomBytes(32).toString('hex');
@@ -136,9 +138,9 @@ app.post('/login/learner', async (req, res) => {
 // handle login institution
 app.post('/login/institution', async (req, res) => {
   try {
-    const { institutionEmail } = req.body;
+    const { institutionEmail, Password } = req.body;
 
-    if (!institutionEmail) {
+    if (!institutionEmail || !Password) { 
       return res.status(400).send('Missing data.');
     }
 
@@ -146,6 +148,7 @@ app.post('/login/institution', async (req, res) => {
     const user = await prisma.institutionProfile.findUnique({
       where: {
         institutionEmail: institutionEmail,
+
       },
     });
 
@@ -154,7 +157,7 @@ app.post('/login/institution', async (req, res) => {
     }
 
     // Verify the password (you should use a secure password hashing library like bcrypt)
-    const isPasswordValid = await verifyPassword(password, user.password);
+    const isPasswordValid = await verifyPassword(Password, user.Password);
 
     if (!isPasswordValid) {
       return res.status(401).send('Incorrect password.');
@@ -164,7 +167,7 @@ app.post('/login/institution', async (req, res) => {
     req.session.user = user; // Store user data in the session
 
     // Redirect to the institution dashboard
-    res.redirect('/institution/dashboard'); // Replace with your actual dashboard URL
+    res.redirect('public/institution-views/dashboard.html'); // Replace with your actual dashboard URL
   } catch (error) {
     console.error('Error logging in user:', error.message);
     return res.status(500).send('An error occurred during user login.');
