@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/search?name=${name}`);
 
             if (response.ok) {
+                // Parse the response as JSON
+                const learner = await response.json();
                 const contentType = response.headers.get('content-type');
                 if (contentType && contentType.includes('application/json')) {
+
                     // Parse the response as JSON
                     const learner = await response.json();
 
