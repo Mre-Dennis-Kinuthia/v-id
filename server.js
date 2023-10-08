@@ -66,7 +66,7 @@ app.post('/register', async (req, res) => {
         data: {
           institutionName: institutionName,
           institutionEmail: institutionEmail,
-          Programs: Programs.split(','), // Split programs into an array if they are comma-separated
+          Programs: [Programs], // Wrap Programs in an array to store it as an array of strings
           Facilitator: Facilitator,
           Username: Username,
           Password: Password, // You should hash the password before storing it in production
