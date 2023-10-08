@@ -93,6 +93,10 @@ app.post('/register', async (req, res) => {
       return res.status(400).send('Passwords do not match.');
     }
 
+
+    // Hash the password using bcrypt
+    const hashedPassword = await bcrypt.hash(Password, 10);
+
     // Create a new institution profile in the database
     try {
       const newUser = await prisma.institutionProfile.create({
@@ -102,7 +106,7 @@ app.post('/register', async (req, res) => {
           Programs: [Programs], // Wrap Programs in an array to store it as an array of strings
           Facilitator: Facilitator,
           Username: Username,
-          Password: Password, // You should hash the password before storing it in production
+          Password: hashedPassword, // You should hash the password before storing it in production
         },
       });
 
@@ -155,7 +159,7 @@ app.post('/login/institution', async (req, res) => {
   try {
     const { institutionEmail, Password } = req.body;
 
-    if (!institutionEmail || !Password) { 
+    if (!institutionEmail || !Password) {
       return res.status(400).send('Missing data.');
     }
 
