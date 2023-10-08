@@ -151,6 +151,7 @@ body {
     margin: 20px 0;
     position: absolute;
     left: 45%;
+    width: 90%;
 }
 
 input[type="text"] {
@@ -159,8 +160,8 @@ input[type="text"] {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    height: 200px;
-    width: 40%;
+    height: 100px;
+    width: 70%;
 }
 
 .btn {
