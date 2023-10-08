@@ -110,8 +110,9 @@ body {
 .dashboard-cards{
     position: absolute;
     left: 25%;
+    width: 75%;
+    height: 650px;
 }
-
 
 .card {
     background-color: #fff;
