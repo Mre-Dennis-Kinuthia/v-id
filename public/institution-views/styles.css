@@ -30,13 +30,6 @@ li {
     padding: 0;
     box-sizing: border-box;
 }
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
 /* Add this CSS */
 #view2, #view3, #view4 {
     display: none;
@@ -217,6 +210,6 @@ input[type="text"] {
     top: 30%;
     left: 25%;
     width: 75%;
-    height: 550px;
+    height: 500px;
     background-color: #007BFF;
 }
