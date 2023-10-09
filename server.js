@@ -52,6 +52,15 @@ app.get('/login/learner', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/learner/index.html'));
 });
 
+// Serve CSS files with the correct MIME type
+app.get('/login/learner.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'login', 'learner.css'), {
+    headers: {
+      'Content-Type': 'text/css', // Set the correct MIME type for CSS
+    },
+  });
+});
+
 app.get('/login/institution', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', '/auth/institution/login.html'));
 });
