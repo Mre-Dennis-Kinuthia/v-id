@@ -4,30 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&family=Ubuntu&display=swap" rel="stylesheet">
     <title>ID</title>
 </head>
 <body>
     <nav>
         <ul>
-            <li><button id="btnView1">Dashboard</button></li>
-            <li><button id="btnView2">Notice Board</button></li>
+            <button id="btnView1">Dashboard</button>
+            <button id="btnView2">Notice Board</button>
         </ul>
     </nav>
 <div class="main-id">
     <div>
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
-        <h1>John Doe</h1>
-        <p class="title">Student</p>
-        <p>Program: Computer Science</p> <!-- Add the program here -->
-        <p>Student ID: 12345</p> <!-- Add the student ID here -->
-        <p>Cohort: Fall 2022</p> <!-- Add the cohort here -->
-        <p>Class of Graduation: 2026</p> <!-- Add the class of graduation here -->
+        <h1 style="color: #58595B">John Doe</h1>
+        <p class="title">Learner</p>
+        <p>Data Analytics </p>
+        <p>Cohort 001</p>
+        <div class="id-string">
+            <p>568sstrg46dhe8w3nd785hr7</p>
+        </div> <!-- Add the student ID here -->
+        <p>Fall 2022</p> <!-- Add the cohort here -->
+     <!-- Add the class of graduation here -->
 
             <!-- Activity Bar -->
         <div class="activity-bar">
             <div class="activity-status active">Active</div>
-            <div class="activity-status inactive">Inactive</div>
-            <div class="activity-status deferred">Deferred</div>
+             <!-- 
+                <div class="activity-status inactive">Inactive</div>
+                <div class="activity-status deferred">Deferred</div>  
+            -->
         </div>
 
         <div style="margin: 24px 0;">
@@ -36,13 +44,13 @@
             <a href="#"><i class="fa fa-linkedin"></i></a>
             <a href="#"><i class="fa fa-facebook"></i></a>
         </div>
-        <p><button>Contact</button></p>
+        <button>Contact Support</button>
     </div>
 </div>
 
     </div>
-    <div class="broadcast">
-        <!-- Notice Board Section -->
+    <div class="broadcast" style="display:none">
+
         <h2>Notice Board</h2>
         <ul id="noticeList">
             <li>Notice 1: Lorem ipsum dolor sit amet.</li>
