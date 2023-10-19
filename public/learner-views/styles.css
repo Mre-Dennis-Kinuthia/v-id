@@ -36,6 +36,7 @@ button{
     text-align: center;
   }
 }
+
 .main-id img {
   width: 100%;
   max-width: 150px;
@@ -87,6 +88,8 @@ button{
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+  width: 200px;
+  margin-left: 50px;
 }
 
 .activity-status {
@@ -113,9 +116,10 @@ button{
 }
 
 .id-string{
-  height: 25px;
+  height: 20px;
   width: 200px;
-  background-color: blue;
+  background-color: #5199FF;
   border-radius: 7px;
-
+  margin-left: 50px;
+  color: #fff;
 }
