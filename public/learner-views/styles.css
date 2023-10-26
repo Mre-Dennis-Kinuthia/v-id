@@ -1,7 +1,8 @@
 nav{
 position: absolute;
-top: 90%;
-left: 38.5%;
+top: 85%;
+left: 37.5%;
+
 }
 button{
   height: 40px;
@@ -26,7 +27,6 @@ button{
   background-repeat: no-repeat;
   position: relative;
 }
-
 
 /* Styles for smaller screens (e.g., mobile) */
 @media screen and (max-width: 768px) {
@@ -123,3 +123,25 @@ button{
   margin-left: 50px;
   color: #fff;
 }
+
+.broadcast-head{
+  text-align: center;
+}
+
+.notice-card{
+  height: 500px;
+  width: 350px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  background-color: grey;
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  }
+
+  .notice-card li {
+    list-style-type: none;
+    padding: 5px;
+    font-size: 20px;
+    color: #fff;
+  }
